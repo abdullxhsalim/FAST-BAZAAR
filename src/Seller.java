@@ -9,11 +9,25 @@ public class Seller extends User implements Serializable {
     }
     public void addProduct(Product product) {
         productList.add(product);
-        updateBinaryFile();
+        List<Seller> sellers = readSellersFromFile();
+        for (int j = 0; j < sellers.size(); j++) {
+            if (sellers.get(j).getEmail().equals(this.getEmail())) {
+                sellers.set(j, this);
+                break;
+            }
+        }
+        updateBinaryFile(sellers);
     }
     public void removeProduct(Product product) {
         productList.remove(product);
-        updateBinaryFile();
+        List<Seller> sellers = readSellersFromFile();
+        for (int j = 0; j < sellers.size(); j++) {
+            if (sellers.get(j).getEmail().equals(this.getEmail())) {
+                sellers.set(j, this);
+                break;
+            }
+        }
+        updateBinaryFile(sellers);
     }
     public void updateProduct() {
         Scanner input = new Scanner(System.in);
@@ -44,7 +58,14 @@ public class Seller extends User implements Serializable {
                 String time = input.nextLine();
                 Product updatedProduct = new Product(name, description, price, quantity, category, getName(), image, status, date, time, id);
                 productList.set(productList.indexOf(currentProduct), updatedProduct);
-                updateBinaryFile();
+                ArrayList<Seller> sellers = readSellersFromFile();
+                for (int j = 0; j < sellers.size(); j++) {
+                    if (sellers.get(j).getEmail().equals(this.getEmail())) {
+                        sellers.set(j, this);
+                        break;
+                    }
+                }
+                updateBinaryFile(sellers);    
                 input.close();
                 return;
             }
@@ -52,12 +73,19 @@ public class Seller extends User implements Serializable {
         input.close();
         System.out.println("Product with id " + id + " not found.");
     }
-        public void updateProduct(String id, Product updatedProduct) {
+    public void updateProduct(String id, Product updatedProduct) {
         for (int i = 0; i < productList.size(); i++) {
             Product currentProduct = productList.get(i);
             if (currentProduct.getId().equals(id)) {
-                productList.set(i, updatedProduct);
-                updateBinaryFile();
+                productList.set(i, updatedProduct);    
+                ArrayList<Seller> sellers = readSellersFromFile();    
+                for (int j = 0; j < sellers.size(); j++) {
+                    if (sellers.get(j).getEmail().equals(this.getEmail())) {
+                        sellers.set(j, this);
+                        break;
+                    }
+                }
+                updateBinaryFile(sellers);
                 return;
             }
         }
@@ -111,22 +139,45 @@ public class Seller extends User implements Serializable {
         setCity(city);
         setZip(zip);
         setCountry(country);
-        input.close();
-        updateBinaryFile();
+        input.close();    
+        ArrayList<Seller> sellers = readSellersFromFile();
+        for (int i = 0; i < sellers.size(); i++) {
+            if (sellers.get(i).getEmail().equals(this.getEmail())) {
+                sellers.set(i, this);
+                break;
+            }
+        }    
+        updateBinaryFile(sellers);
     }
-    private void updateBinaryFile() {
+    private void updateBinaryFile(List<Seller> sellers) {
         try {
             File directory = new File("../data");
             if (!directory.exists()){
                 directory.mkdirs();
             }
-            FileOutputStream fileOut = new FileOutputStream("../data/sellers.ser");            ObjectOutputStream out = new ObjectOutputStream(fileOut);
-            out.writeObject(this);
+            FileOutputStream fileOut = new FileOutputStream("../data/sellers.ser");
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(sellers);
             out.close();
             fileOut.close();
         } catch (IOException i) {
             i.printStackTrace();
         }
     }
-
+    private ArrayList<Seller> readSellersFromFile() {
+        ArrayList<Seller> sellers = new ArrayList<>();
+        try {
+            FileInputStream fileIn = new FileInputStream("../data/sellers.ser");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            sellers = (ArrayList<Seller>) in.readObject();
+            in.close();
+            fileIn.close();
+        } catch (IOException i) {
+            i.printStackTrace();
+        } catch (ClassNotFoundException c) {
+            System.out.println("Seller class not found");
+            c.printStackTrace();
+        }
+        return sellers;
+    }
 }
