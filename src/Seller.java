@@ -165,19 +165,28 @@ public class Seller extends User implements Serializable {
         }
     }
     private ArrayList<Seller> readSellersFromFile() {
-        ArrayList<Seller> sellers = new ArrayList<>();
+        ArrayList<Seller> sellers = null;
         try {
             FileInputStream fileIn = new FileInputStream("../data/sellers.ser");
             ObjectInputStream in = new ObjectInputStream(fileIn);
-            sellers = (ArrayList<Seller>) in.readObject();
+            Object readObject = in.readObject();
+            if (readObject instanceof ArrayList<?>) {
+                @SuppressWarnings("unchecked")
+                ArrayList<Seller> tempSellers = (ArrayList<Seller>) readObject;
+                sellers = tempSellers;
+            } else {
+                System.out.println("Read object is not an ArrayList");
+            }
             in.close();
             fileIn.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found at the specified path");
         } catch (IOException i) {
             i.printStackTrace();
         } catch (ClassNotFoundException c) {
             System.out.println("Seller class not found");
             c.printStackTrace();
         }
-        return sellers;
+        return sellers == null ? new ArrayList<>() : sellers;
     }
 }
