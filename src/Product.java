@@ -90,4 +90,20 @@ public class Product {
     public void setName(String name) {
         this.name = name;
     }    
+    @Override
+    public String toString() {
+        return "Product {\n" +
+                "  name: " + name + ",\n" +
+                "  description: " + description + ",\n" +
+                "  price: " + price + ",\n" +
+                "  quantity: " + quantity + ",\n" +
+                "  category: " + category + ",\n" +
+                "  seller: " + seller + ",\n" +
+                "  image: " + image + ",\n" +
+                "  status: " + status + ",\n" +
+                "  date: " + date + ",\n" +
+                "  time: " + time + ",\n" +
+                "  id: " + id + "\n" +
+                "}";
+}
 }
