@@ -66,6 +66,6 @@ public abstract class User {
     public void setZip(int zip) {
         this.zip = zip;
     }
-    public abstract void printInfo();
+    public abstract void viewProfile();
     
 }
