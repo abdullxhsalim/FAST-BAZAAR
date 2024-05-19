@@ -9,7 +9,7 @@ public class Seller extends User implements Serializable {
     }
     public void addProduct(Product product) {
         productList.add(product);
-        List<Seller> sellers = readSellersFromFile();
+        ArrayList<Seller> sellers = readSellersFromFile();
         for (int j = 0; j < sellers.size(); j++) {
             if (sellers.get(j).getEmail().equals(this.getEmail())) {
                 sellers.set(j, this);
@@ -20,7 +20,7 @@ public class Seller extends User implements Serializable {
     }
     public void removeProduct(Product product) {
         productList.remove(product);
-        List<Seller> sellers = readSellersFromFile();
+        ArrayList<Seller> sellers = readSellersFromFile();
         for (int j = 0; j < sellers.size(); j++) {
             if (sellers.get(j).getEmail().equals(this.getEmail())) {
                 sellers.set(j, this);
@@ -32,7 +32,7 @@ public class Seller extends User implements Serializable {
     public void updateProduct() {
         Scanner input = new Scanner(System.in);
         viewProducts();
-        System.out.println("Enter the id of the product you want to update: ");
+        System.out.println("Enter the ID of the product you want to update: ");
         String id = input.nextLine();
         for (Product currentProduct : productList) {
             if (currentProduct.getId().equals(id)) {
@@ -71,7 +71,7 @@ public class Seller extends User implements Serializable {
             }
         }
         input.close();
-        System.out.println("Product with id " + id + " not found.");
+        System.out.println("Product with ID " + id + " is not found.");
     }
     public void updateProduct(String id, Product updatedProduct) {
         for (int i = 0; i < productList.size(); i++) {
@@ -94,7 +94,6 @@ public class Seller extends User implements Serializable {
     public void viewSales() {
         // View sales
     }
-
     public void viewOrders() {
         // View orders
     }
@@ -174,7 +173,8 @@ public class Seller extends User implements Serializable {
                 @SuppressWarnings("unchecked")
                 ArrayList<Seller> tempSellers = (ArrayList<Seller>) readObject;
                 sellers = tempSellers;
-            } else {
+            } 
+            else {
                 System.out.println("Read object is not an ArrayList");
             }
             in.close();

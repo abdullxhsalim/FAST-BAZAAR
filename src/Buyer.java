@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 
-public class Buyer extends User implements Serializable{
+public class Buyer extends User implements Serializable {
     private ArrayList<Order> orders;
     private ArrayList<Product> cart;
     public Buyer(String name, String email, String password, String phone, String address, String city, int zip, String country) {

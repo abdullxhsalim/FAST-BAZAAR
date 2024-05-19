@@ -105,5 +105,5 @@ public class Product {
                 "  time: " + time + ",\n" +
                 "  id: " + id + "\n" +
                 "}";
-}
+    }
 }
