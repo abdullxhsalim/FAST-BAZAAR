@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+
 public class Product {
     private String name;
     private String description;
@@ -7,11 +9,10 @@ public class Product {
     private String seller;
     private String image;
     private String status;
-    private String date;
-    private String time;
+    private LocalDateTime dateTime;
     private String id;
     
-    public Product(String name, String description, double price, int quantity, String category, String seller, String image, String status, String date, String time, String id) {
+    public Product(String name, String description, double price, int quantity, String category, String seller, String image, String status, String id) {
         this.name = name;
         this.description = description;
         this.price = price;
@@ -20,15 +21,14 @@ public class Product {
         this.seller = seller;
         this.image = image;
         this.status = status;
-        this.date = date;
-        this.time = time;
+        this.dateTime = LocalDateTime.now();
         this.id = id;
     }
     public String getCategory() {
         return category;
     }
-    public String getDate() {
-        return date;
+    public LocalDateTime getDateTime() {
+        return dateTime;
     }
     public String getDescription() {
         return description;
@@ -51,17 +51,11 @@ public class Product {
     public String getStatus() {
         return status;
     }
-    public String getTime() {
-        return time;
-    }
     public String getName() {
         return name;
     }
     public void setCategory(String category) {
         this.category = category;
-    }
-    public void setDate(String date) {
-        this.date = date;
     }
     public void setDescription(String description) {
         this.description = description;
@@ -84,8 +78,8 @@ public class Product {
     public void setStatus(String status) {
         this.status = status;
     }
-    public void setTime(String time) {
-        this.time = time;
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
     }
     public void setName(String name) {
         this.name = name;
@@ -101,8 +95,7 @@ public class Product {
                 "  seller: " + seller + ",\n" +
                 "  image: " + image + ",\n" +
                 "  status: " + status + ",\n" +
-                "  date: " + date + ",\n" +
-                "  time: " + time + ",\n" +
+                "  dateTime: " + dateTime + ",\n" +
                 "  id: " + id + "\n" +
                 "}";
     }

@@ -52,11 +52,7 @@ public class Seller extends User implements Serializable {
                 String image = input.nextLine();
                 System.out.println("Enter new status: ");
                 String status = input.nextLine();
-                System.out.println("Enter new date: ");
-                String date = input.nextLine();
-                System.out.println("Enter new time: ");
-                String time = input.nextLine();
-                Product updatedProduct = new Product(name, description, price, quantity, category, getName(), image, status, date, time, id);
+                Product updatedProduct = new Product(name, description, price, quantity, category, getName(), image, status, id);
                 productList.set(productList.indexOf(currentProduct), updatedProduct);
                 ArrayList<Seller> sellers = readSellersFromFile();
                 for (int j = 0; j < sellers.size(); j++) {
