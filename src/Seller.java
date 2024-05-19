@@ -1,6 +1,7 @@
-import java.util.ArrayList;
+import java.util.*;
+import java.io.*;
 
-public class Seller extends User {
+public class Seller extends User implements Serializable {
     private ArrayList<Product> productList;
     public Seller(String name, String email, String password, String phone, String address, String city, int zip, String country) {
         super(name, email, password, phone, address, city, zip, country);
