@@ -24,7 +24,7 @@ public class Buyer extends User implements Serializable{
     public void removeFromCart(Product product) {
         this.cart.remove(product);
     }
-    public void printInfo() {
+    public void viewProfile() {
         System.out.println("Name: " + getName());
         System.out.println("Email: " + getEmail());
         System.out.println("Phone: " + getPhone());
