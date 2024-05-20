@@ -1,5 +1,7 @@
-import java.util.*;
-import java.time.*;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class BuyerOrder {
     ArrayList<Product> orderedProducts;
@@ -91,5 +93,4 @@ public class BuyerOrder {
     public void setStatus(String status) {
         this.status = status;
     }
-
 }

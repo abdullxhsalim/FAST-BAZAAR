@@ -1,4 +1,4 @@
-import java.util.*;
+import java.util.ArrayList;
 
 public class SellerOrder {
     private Seller seller;
@@ -19,5 +19,4 @@ public class SellerOrder {
     public void setProducts(ArrayList<Product> products) {
         this.products = products;
     }
-    
 }

@@ -76,5 +76,4 @@ public abstract class User {
         System.out.println("Zip: " + getZip());
         System.out.println("Country: " + getCountry());
     }
-    
 }
