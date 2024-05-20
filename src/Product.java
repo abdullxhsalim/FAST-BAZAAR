@@ -6,13 +6,13 @@ public class Product {
     private double price;
     private int quantity;
     private String category;
-    private String seller;
+    private Seller seller;
     private String image;
     private String status;
     private LocalDateTime dateTime;
     private String id;
     
-    public Product(String name, String description, double price, int quantity, String category, String seller, String image, String status, String id) {
+    public Product(String name, String description, double price, int quantity, String category, Seller seller, String image, String status, String id) {
         this.name = name;
         this.description = description;
         this.price = price;
@@ -45,7 +45,7 @@ public class Product {
     public int getQuantity() {
         return quantity;
     }
-    public String getSeller() {
+    public Seller getSeller() {
         return seller;
     }
     public String getStatus() {
@@ -72,7 +72,7 @@ public class Product {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
-    public void setSeller(String seller) {
+    public void setSeller(Seller seller) {
         this.seller = seller;
     }
     public void setStatus(String status) {
