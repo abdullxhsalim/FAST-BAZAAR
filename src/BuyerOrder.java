@@ -1,7 +1,7 @@
 import java.util.*;
 import java.time.*;
 
-public class Order {
+public class BuyerOrder {
     ArrayList<Product> orderedProducts;
     private Buyer buyer;
     private ArrayList<Seller> sellers;
@@ -15,7 +15,7 @@ public class Order {
     private String city;
     private int zip;
     private String country;
-    public Order(Buyer buyer, ArrayList<Product> Cart, Courier courier, String status, String id, double totalCost, String address, String city, int zip, String country) {
+    public BuyerOrder(Buyer buyer, ArrayList<Product> Cart, Courier courier, String status, String id, double totalCost, String address, String city, int zip, String country) {
         this.buyer = buyer;
         this.sellers = new ArrayList<>();
         for (Product product : Cart) {
@@ -33,6 +33,18 @@ public class Order {
         this.country = country;
         this.orderedProducts = new ArrayList<>();
         this.orderPlacementTime = LocalDateTime.now();
+        HashMap<Seller, ArrayList<Product>> sellerProducts = new HashMap<>();
+        for (Product product : Cart) {
+            Seller seller = product.getSeller();
+            if (!sellerProducts.containsKey(seller)) {
+                sellerProducts.put(seller, new ArrayList<>());
+            }
+            sellerProducts.get(seller).add(product);
+        }
+        for (Map.Entry<Seller, ArrayList<Product>> seller : sellerProducts.entrySet()) {
+            SellerOrder sellerOrder = new SellerOrder(seller.getKey(), seller.getValue());
+            seller.getKey().getSellerOrders().add(sellerOrder);
+        }
     }
     public ArrayList<Product> getOrderedProducts() {
         return orderedProducts;
