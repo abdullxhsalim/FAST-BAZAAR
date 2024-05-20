@@ -66,6 +66,15 @@ public abstract class User {
     public void setZip(int zip) {
         this.zip = zip;
     }
-    public abstract void viewProfile();
+    public void viewProfile() {
+        System.out.println("Name: " + getName());
+        System.out.println("Email: " + getEmail());
+        System.out.println("Role: " + getClass());
+        System.out.println("Phone: " + getPhone());
+        System.out.println("Address: " + getAddress());
+        System.out.println("City: " + getCity());
+        System.out.println("Zip: " + getZip());
+        System.out.println("Country: " + getCountry());
+    }
     
 }

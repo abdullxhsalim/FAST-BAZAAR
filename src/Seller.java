@@ -106,16 +106,6 @@ public class Seller extends User implements Serializable {
             System.out.println(x);
         }
     }
-    public void viewProfile() {
-        System.out.println("Name: " + getName());
-        System.out.println("Email: " + getEmail());
-        System.out.println("Role: Seller");
-        System.out.println("Phone: " + getPhone());
-        System.out.println("Address: " + getAddress());
-        System.out.println("City: " + getCity());
-        System.out.println("Zip: " + getZip());
-        System.out.println("Country: " + getCountry());
-    }
     public void updateProfile() {
         Scanner input = new Scanner(System.in);
         System.out.println("Enter new name: ");
