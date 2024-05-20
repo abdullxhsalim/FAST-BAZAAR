@@ -2,31 +2,55 @@ import java.util.*;
 import java.io.*;
 
 public class Buyer extends User implements Serializable {
-    private ArrayList<Order> orders;
-    private ArrayList<Product> cart;
+    private ArrayList<Order> Orders;
+    private ArrayList<Product> Cart;
     public Buyer(String name, String email, String password, String phone, String address, String city, int zip, String country) {
         super(name, email, password, phone, address, city, zip, country);
-        this.orders = new ArrayList<>();
-        this.cart = new ArrayList<>(); // initialize the cart
+        this.Orders = new ArrayList<>();
+        this.Cart = new ArrayList<>();
     }
     public ArrayList<Order> getOrders() {
-        return orders;
+        return Orders;
     }
     public void addOrder(Order order) {
-        this.orders.add(order);
+        Orders.add(order);
+        ArrayList<Buyer> buyers = readBuyersFromFile();
+        for (int i = 0; i < buyers.size(); i++) {
+            if (buyers.get(i).getEmail().equals(this.getEmail())) {
+                buyers.set(i, this);
+                break;
+            }
+        }
+        updateBinaryFile(buyers);
     }
     public ArrayList<Product> getCart() {
-        return cart;
+        return Cart;
     }
     public void addToCart(Product product) {
-       this.cart.add(product);
+       Cart.add(product);
+        ArrayList<Buyer> buyers = readBuyersFromFile();
+        for (int i = 0; i < buyers.size(); i++) {
+            if (buyers.get(i).getEmail().equals(this.getEmail())) {
+                buyers.set(i, this);
+                break;
+            }
+        }
+        updateBinaryFile(buyers);
     }
     public void removeFromCart(Product product) {
-        this.cart.remove(product);
+        this.Cart.remove(product);
+        ArrayList<Buyer> buyers = readBuyersFromFile();
+        for (int i = 0; i < buyers.size(); i++) {
+            if (buyers.get(i).getEmail().equals(this.getEmail())) {
+                buyers.set(i, this);
+                break;
+            }
+        }
+        updateBinaryFile(buyers);
     }
     public void viewCart() {
-        for (Product product : cart) {
-            System.out.println(product);
+        for (Product x : Cart) {
+            System.out.println(x);
         }
     }
     public void viewProfile() {
