@@ -3,9 +3,17 @@ import java.io.*;
 
 public class Seller extends User implements Serializable {
     private ArrayList<Product> productList;
+    private ArrayList<SellerOrder> sellerOrders;
     public Seller(String name, String email, String password, String phone, String address, String city, int zip, String country) {
         super(name, email, password, phone, address, city, zip, country);
         this.productList = new ArrayList<Product>();
+        this.sellerOrders = new ArrayList<SellerOrder>();
+    }
+    public ArrayList<SellerOrder> getSellerOrders() {
+        return sellerOrders;
+    }
+    public ArrayList<Product> getProductList() {
+        return productList;
     }
     public void addProduct(Product product) {
         productList.add(product);
