@@ -2,17 +2,17 @@ import java.util.*;
 import java.io.*;
 
 public class Buyer extends User implements Serializable {
-    private ArrayList<Order> Orders;
+    private ArrayList<BuyerOrder> Orders;
     private ArrayList<Product> Cart;
     public Buyer(String name, String email, String password, String phone, String address, String city, int zip, String country) {
         super(name, email, password, phone, address, city, zip, country);
         this.Orders = new ArrayList<>();
         this.Cart = new ArrayList<>();
     }
-    public ArrayList<Order> getOrders() {
+    public ArrayList<BuyerOrder> getOrders() {
         return Orders;
     }
-    public void addOrder(Order order) {
+    public void addOrder(BuyerOrder order) {
         Orders.add(order);
         ArrayList<Buyer> buyers = readBuyersFromFile();
         for (int i = 0; i < buyers.size(); i++) {
