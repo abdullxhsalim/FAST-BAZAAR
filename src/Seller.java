@@ -145,13 +145,13 @@ public class Seller extends User implements Serializable {
         }    
         updateBinaryFile(sellers);
     }
-    private void updateBinaryFile(List<Seller> sellers) {
+    public static void updateBinaryFile(List<Seller> sellers) {
         try {
-            File directory = new File("../data");
+            File directory = new File("C:\\Users\\Abdullah\\OneDrive - northsouth.edu\\NSU\\241\\Courses\\CSE215L\\Project\\data\\sellers.ser");
             if (!directory.exists()){
                 directory.mkdirs();
             }
-            FileOutputStream fileOut = new FileOutputStream("../data/sellers.ser");
+            FileOutputStream fileOut = new FileOutputStream("C:\\Users\\Abdullah\\OneDrive - northsouth.edu\\NSU\\241\\Courses\\CSE215L\\Project\\data\\sellers.ser");
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeObject(sellers);
             out.close();
@@ -162,8 +162,13 @@ public class Seller extends User implements Serializable {
     }
     public static ArrayList<Seller> readSellersFromFile() {
         ArrayList<Seller> sellers = null;
+        File file = new File("C:\\Users\\Abdullah\\OneDrive - northsouth.edu\\NSU\\241\\Courses\\CSE215L\\Project\\data\\sellers.ser");
         try {
-            FileInputStream fileIn = new FileInputStream("../data/sellers.ser");
+            if (!file.exists()) {
+                file.createNewFile();
+                System.out.println("Sellers file created");
+            }
+            FileInputStream fileIn = new FileInputStream("C:\\Users\\Abdullah\\OneDrive - northsouth.edu\\NSU\\241\\Courses\\CSE215L\\Project\\data\\sellers.ser");
             ObjectInputStream in = new ObjectInputStream(fileIn);
             Object readObject = in.readObject();
             if (readObject instanceof ArrayList<?>) {
@@ -178,6 +183,7 @@ public class Seller extends User implements Serializable {
             fileIn.close();
         } catch (FileNotFoundException e) {
             System.out.println("Seller file not found at the specified path");
+
         } catch (IOException i) {
             i.printStackTrace();
         } catch (ClassNotFoundException c) {

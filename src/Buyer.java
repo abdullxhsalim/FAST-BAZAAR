@@ -96,11 +96,11 @@ public class Buyer extends User implements Serializable {
     }
     public static void updateBinaryFile(List<Buyer> buyers) {
         try {
-            File directory = new File("../data");
+            File directory = new File("C:\\Users\\Abdullah\\OneDrive - northsouth.edu\\NSU\\241\\Courses\\CSE215L\\Project\\data\\buyers.ser");
             if (!directory.exists()){
                 directory.mkdirs();
             }
-            FileOutputStream fileOut = new FileOutputStream("../data/buyers.ser");
+            FileOutputStream fileOut = new FileOutputStream("C:\\Users\\Abdullah\\OneDrive - northsouth.edu\\NSU\\241\\Courses\\CSE215L\\Project\\data\\buyers.ser");
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeObject(buyers);
             out.close();
@@ -111,12 +111,13 @@ public class Buyer extends User implements Serializable {
     }
     public static ArrayList<Buyer> readBuyersFromFile() {
         ArrayList<Buyer> buyers = null;
-        File file = new File("../data/buyers.ser");
+        File file = new File("C:\\Users\\Abdullah\\OneDrive - northsouth.edu\\NSU\\241\\Courses\\CSE215L\\Project\\data\\buyers.ser");
         try {
             if (!file.exists()) {
                 file.createNewFile();
+                System.out.println("Buyers file created");
             }
-            FileInputStream fileIn = new FileInputStream("../data/buyers.ser");
+            FileInputStream fileIn = new FileInputStream("C:\\Users\\Abdullah\\OneDrive - northsouth.edu\\NSU\\241\\Courses\\CSE215L\\Project\\data\\buyers.ser");
             ObjectInputStream in = new ObjectInputStream(fileIn);
             Object readObject = in.readObject();
             if (readObject instanceof ArrayList<?>) {

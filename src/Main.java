@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.*;
 public class Main {
     static ArrayList<Buyer> buyers = new ArrayList<>();
@@ -14,7 +15,7 @@ public class Main {
     }
 
     public static void buyerLogic() {
-        
+
         Scanner input = new Scanner(System.in);
         System.out.println("Buyer Page");
         System.out.println("1. Register");

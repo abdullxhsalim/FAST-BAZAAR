@@ -33,13 +33,13 @@ public class BuyerOrder {
         this.city = city;
         this.zip = zip;
         this.country = country;
-        this.orderedProducts = new ArrayList<>();
+        this.orderedProducts = Cart;
         this.orderPlacementTime = LocalDateTime.now();
         HashMap<Seller, ArrayList<Product>> sellerProducts = new HashMap<>();
         for (Product product : Cart) {
             Seller seller = product.getSeller();
             if (!sellerProducts.containsKey(seller)) {
-                sellerProducts.put(seller, new ArrayList<>());
+                sellerProducts.put(seller, new ArrayList<Product>());
             }
             sellerProducts.get(seller).add(product);
         }
