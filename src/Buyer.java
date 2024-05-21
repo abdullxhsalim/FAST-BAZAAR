@@ -92,7 +92,7 @@ public class Buyer extends User implements Serializable {
         }    
         updateBinaryFile(buyers);
     }
-    private void updateBinaryFile(List<Buyer> buyers) {
+    public static void updateBinaryFile(List<Buyer> buyers) {
         try {
             File directory = new File("../data");
             if (!directory.exists()){
@@ -107,9 +107,13 @@ public class Buyer extends User implements Serializable {
             i.printStackTrace();
         }
     }
-    private ArrayList<Buyer> readBuyersFromFile() {
+    public static ArrayList<Buyer> readBuyersFromFile() {
         ArrayList<Buyer> buyers = null;
+        File file = new File("../data/buyers.ser");
         try {
+            if (!file.exists()) {
+                file.createNewFile();
+            }
             FileInputStream fileIn = new FileInputStream("../data/buyers.ser");
             ObjectInputStream in = new ObjectInputStream(fileIn);
             Object readObject = in.readObject();

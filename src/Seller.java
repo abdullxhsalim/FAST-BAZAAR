@@ -160,7 +160,7 @@ public class Seller extends User implements Serializable {
             i.printStackTrace();
         }
     }
-    private ArrayList<Seller> readSellersFromFile() {
+    public static ArrayList<Seller> readSellersFromFile() {
         ArrayList<Seller> sellers = null;
         try {
             FileInputStream fileIn = new FileInputStream("../data/sellers.ser");
