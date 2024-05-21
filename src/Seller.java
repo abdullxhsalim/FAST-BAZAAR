@@ -177,7 +177,7 @@ public class Seller extends User implements Serializable {
             in.close();
             fileIn.close();
         } catch (FileNotFoundException e) {
-            System.out.println("File not found at the specified path");
+            System.out.println("Seller file not found at the specified path");
         } catch (IOException i) {
             i.printStackTrace();
         } catch (ClassNotFoundException c) {

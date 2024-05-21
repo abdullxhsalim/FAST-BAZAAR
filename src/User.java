@@ -8,6 +8,7 @@ public abstract class User {
     private int zip;
     private String country;
 
+    public User() {}
     public User(String name, String email, String password, String phone, String address, String city, int zip, String country) {
         this.name = name;
         this.email = email;

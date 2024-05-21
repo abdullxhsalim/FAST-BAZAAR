@@ -14,6 +14,7 @@ public class Main {
     }
 
     public static void buyerLogic() {
+        
         Scanner input = new Scanner(System.in);
         System.out.println("Buyer Page");
         System.out.println("1. Register");
@@ -35,38 +36,42 @@ public class Main {
     }
 
     public static void registerBuyer() {
-        Scanner scanner = new Scanner(System.in);
+        Scanner input = new Scanner(System.in);
 
         System.out.println("Enter your name:");
-        String name = scanner.nextLine();
+        String name = input.nextLine();
 
         System.out.println("Enter your email:");
-        String email = scanner.nextLine();
+        String email = input.nextLine();
 
         System.out.println("Enter your password:");
-        String password = scanner.nextLine();
+        String password = input.nextLine();
 
         System.out.println("Enter your phone:");
-        String phone = scanner.nextLine();
+        String phone = input.nextLine();
 
         System.out.println("Enter your address:");
-        String address = scanner.nextLine();
+        String address = input.nextLine();
 
         System.out.println("Enter your city:");
-        String city = scanner.nextLine();
+        String city = input.nextLine();
 
         System.out.println("Enter your zip:");
-        int zip = scanner.nextInt();
+        int zip = input.nextInt();
+        input.nextLine();
 
         System.out.println("Enter your country:");
-        String country = scanner.nextLine();
-        scanner.close();
+        String country = input.nextLine();
         
         Buyer newBuyer = new Buyer(name, email, password, phone, address, city, zip, country);
         buyers.add(newBuyer);
         Buyer.updateBinaryFile(buyers);
 
         System.out.println("Registration successful!");
+        System.out.println("You can now login");
+        System.out.println("====================================");
+        System.out.println("Press enter to continue");
+        input.nextLine();
     }
 
     public static void loginBuyer() {

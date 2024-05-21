@@ -25,7 +25,7 @@ public class Courier extends User {
             in.close();
             fileIn.close();
         } catch (FileNotFoundException e) {
-            System.out.println("File not found at the specified path");
+            System.out.println("Courier file not found at the specified path");
         } catch (IOException i) {
             i.printStackTrace();
         } catch (ClassNotFoundException c) {

@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Buyer extends User implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 8061711001070044403L;
     private ArrayList<BuyerOrder> Orders;
     private ArrayList<Product> Cart;
     public Buyer(String name, String email, String password, String phone, String address, String city, int zip, String country) {
@@ -128,7 +130,7 @@ public class Buyer extends User implements Serializable {
             in.close();
             fileIn.close();
         } catch (FileNotFoundException e) {
-            System.out.println("File not found at the specified path");
+            System.out.println("Buyer file not found at the specified path");
         } catch (IOException i) {
             i.printStackTrace();
         } catch (ClassNotFoundException c) {
