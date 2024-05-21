@@ -44,7 +44,7 @@ public class BuyerOrder {
             sellerProducts.get(seller).add(product);
         }
         for (Map.Entry<Seller, ArrayList<Product>> seller : sellerProducts.entrySet()) {
-            SellerOrder sellerOrder = new SellerOrder(seller.getKey(), seller.getValue());
+            SellerOrder sellerOrder = new SellerOrder(this.buyer, seller.getKey(), seller.getValue());
             seller.getKey().getSellerOrders().add(sellerOrder);
         }
     }
