@@ -1,5 +1,3 @@
-import java.util.*;
-
 public class Admin {
     public static void printAllBuyers() {
         Main.buyers = Buyer.readBuyersFromFile();
