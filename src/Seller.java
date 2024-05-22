@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Seller extends User implements Serializable {
+public class Seller extends User {
     private ArrayList<Product> productList;
     private ArrayList<SellerOrder> sellerOrders;
     public Seller() {

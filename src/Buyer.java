@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Buyer extends User implements Serializable {
+public class Buyer extends User {
     @Serial
     private static final long serialVersionUID = 1L;
     private ArrayList<BuyerOrder> Orders;
