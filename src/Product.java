@@ -1,4 +1,5 @@
 import java.time.LocalDateTime;
+import java.util.Random;
 
 public class Product {
     private String name;
@@ -10,9 +11,9 @@ public class Product {
     private String image;
     private String status;
     private LocalDateTime dateTime;
-    private String id;
+    private int id;
     
-    public Product(String name, String description, double price, int quantity, String category, Seller seller, String image, String status, String id) {
+    public Product(String name, String description, double price, int quantity, String category, Seller seller, String image, String status) {
         this.name = name;
         this.description = description;
         this.price = price;
@@ -22,8 +23,17 @@ public class Product {
         this.image = image;
         this.status = status;
         this.dateTime = LocalDateTime.now();
-        this.id = id;
+        this.id = generateProductId();
     }
+    public static int generateProductId() {
+    Random random = new Random();
+    int newId = random.nextInt(10000); 
+    while (Main.productIds.contains(newId)) {
+        newId = random.nextInt(10000); 
+    }
+    Main.productIds.add(newId);
+    return newId;
+}
     public String getCategory() {
         return category;
     }
@@ -33,7 +43,7 @@ public class Product {
     public String getDescription() {
         return description;
     }
-    public String getId() {
+    public int getId() {
         return id;
     }
     public String getImage() {
@@ -60,7 +70,7 @@ public class Product {
     public void setDescription(String description) {
         this.description = description;
     }
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
     public void setImage(String image) {

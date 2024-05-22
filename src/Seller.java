@@ -22,16 +22,46 @@ public class Seller extends User {
     public ArrayList<Product> getProductList() {
         return productList;
     }
-    public void addProduct(Product product) {
+    public void addProduct() {
+        Scanner input = new Scanner(System.in);
+        System.out.println("Enter name: ");
+        String name = input.nextLine();
+        System.out.println("Enter description: ");
+        String description = input.nextLine();
+        System.out.println("Enter price: ");
+        double price = input.nextDouble();
+        input.nextLine();
+        System.out.println("Enter quantity: ");
+        int quantity = input.nextInt();
+        input.nextLine();
+        System.out.println("Enter category: ");
+        String category = input.nextLine();
+        System.out.println("Enter image: ");
+        String image = input.nextLine();
+        System.out.println("Enter status: ");
+        String status = input.nextLine();
+        Product product = new Product(name, description, price, quantity, category, this, image, status);
         productList.add(product);
-        ArrayList<Seller> sellers = readSellersFromFile();
-        for (int j = 0; j < sellers.size(); j++) {
-            if (sellers.get(j).getEmail().equals(this.getEmail())) {
-                sellers.set(j, this);
+        Main.sellers = readSellersFromFile();
+        for (int j = 0; j < Main.sellers.size(); j++) {
+            if (Main.sellers.get(j).getEmail().equals(this.getEmail())) {
+                Main.sellers.set(j, this);
                 break;
             }
         }
-        updateBinaryFile(sellers);
+        updateBinaryFile(Main.sellers);
+        input.close();
+    }
+    public void addProduct(Product product) {
+        productList.add(product);
+        Main.sellers = readSellersFromFile();
+        for (int j = 0; j < Main.sellers.size(); j++) {
+            if (Main.sellers.get(j).getEmail().equals(this.getEmail())) {
+                Main.sellers.set(j, this);
+                break;
+            }
+        }
+        updateBinaryFile(Main.sellers);
     }
     public void removeProduct(Product product) {
         productList.remove(product);
@@ -48,9 +78,10 @@ public class Seller extends User {
         Scanner input = new Scanner(System.in);
         viewProducts();
         System.out.println("Enter the ID of the product you want to update: ");
-        String id = input.nextLine();
+        int id = input.nextInt();
+        input.nextLine();
         for (Product currentProduct : productList) {
-            if (currentProduct.getId().equals(id)) {
+            if (currentProduct.getId() == id) {
                 System.out.println("Enter new name: ");
                 String name = input.nextLine();
                 System.out.println("Enter new description: ");
@@ -67,7 +98,7 @@ public class Seller extends User {
                 String image = input.nextLine();
                 System.out.println("Enter new status: ");
                 String status = input.nextLine();
-                Product updatedProduct = new Product(name, description, price, quantity, category, this, image, status, id);
+                Product updatedProduct = new Product(name, description, price, quantity, category, this, image, status);
                 productList.set(productList.indexOf(currentProduct), updatedProduct);
                 ArrayList<Seller> sellers = readSellersFromFile();
                 for (int j = 0; j < sellers.size(); j++) {
@@ -84,10 +115,10 @@ public class Seller extends User {
         input.close();
         System.out.println("Product with ID " + id + " is not found.");
     }
-    public void updateProduct(String id, Product updatedProduct) {
+    public void updateProduct(int id, Product updatedProduct) {
         for (int i = 0; i < productList.size(); i++) {
             Product currentProduct = productList.get(i);
-            if (currentProduct.getId().equals(id)) {
+            if (currentProduct.getId() == id) {
                 productList.set(i, updatedProduct);    
                 ArrayList<Seller> sellers = readSellersFromFile();    
                 for (int j = 0; j < sellers.size(); j++) {
@@ -107,6 +138,30 @@ public class Seller extends User {
     }
     public void viewOrders() {
         // View orders
+    }
+    public void deleteProduct() {
+        Scanner input = new Scanner(System.in);
+        viewProducts();
+        System.out.println("Enter the ID of the product you want to delete: ");
+        int id = input.nextInt();
+        input.nextLine();
+        for (Product currentProduct : productList) {
+            if (currentProduct.getId() == id) {
+                productList.remove(currentProduct);
+                Main.sellers = readSellersFromFile();
+                for (int j = 0; j < Main.sellers.size(); j++) {
+                    if (Main.sellers.get(j).getEmail().equals(this.getEmail())) {
+                        Main.sellers.set(j, this);
+                        break;
+                    }
+                }
+                updateBinaryFile(Main.sellers);
+                input.close();
+                return;
+            }
+        }
+        input.close();
+        System.out.println("Product with ID " + id + " is not found.");
     }
     public void viewProducts() {
         for(Product x: productList) {
@@ -187,6 +242,11 @@ public class Seller extends User {
             else {
                 System.out.println("Read object is not an ArrayList");
             }
+            for (Seller seller : sellers) {
+                for (Product product : seller.getProductList()) {
+                    Main.productIds.add(product.getId());
+                }
+            }
             in.close();
             fileIn.close();
         } catch (FileNotFoundException e) {
@@ -199,6 +259,12 @@ public class Seller extends User {
             c.printStackTrace();
         }
         return sellers == null ? new ArrayList<>() : sellers;
+    }
+    public static void browseAllProducts() {
+        Main.sellers = readSellersFromFile();
+        for (Seller seller : Main.sellers) {
+            seller.viewProducts();
+        }
     }
     @Override
     public String toString() {

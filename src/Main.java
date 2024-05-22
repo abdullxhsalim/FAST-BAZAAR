@@ -1,47 +1,54 @@
 import java.io.*;
 import java.util.*;
+
 public class Main {
-    static ArrayList<Buyer> buyers = new ArrayList<>();
-    static ArrayList<Seller> sellers = new ArrayList<>();
-    static ArrayList<Courier> couriers = new ArrayList<>();
+    public static ArrayList<Buyer> buyers = new ArrayList<>();
+    public static ArrayList<Seller> sellers = new ArrayList<>();
+    public static ArrayList<Courier> couriers = new ArrayList<>();
+    public static HashSet<Integer> productIds = new HashSet<>();
+
     public static void buyerFileReady() {
         buyers = Buyer.readBuyersFromFile();
     }
+
     public static void sellerFileReady() {
         sellers = Seller.readSellersFromFile();
     }
+
     public static void courierFileReady() {
         couriers = Courier.readCouriersFromFile();
     }
 
     public static void buyerLogic() {
         Scanner input = new Scanner(System.in);
-        System.out.println("Buyer Page");
-        System.out.println("1. Register");
-        System.out.println("2. Login");
-        System.out.println("0. Go back to main menu");
-        System.out.println("-1. Exit the program");
-        String option = input.nextLine();
-        switch (option) {
-            case "1":
-                registerBuyer();
-                buyerLogic();
-                break;
-            case "2":
-                loginBuyer();
-                buyerLogic();
-                break;
-            case "0":
-                main(null);
-                break;
-            case "-1":
-                System.out.println("Exiting...");
-                System.exit(0);
-                break;
-            default:
-                System.out.println("Invalid option");
-            input.close();
+        boolean running = true;
+        while (running) {
+            System.out.println("Buyer Page");
+            System.out.println("1. Register");
+            System.out.println("2. Login");
+            System.out.println("0. Go back to main menu");
+            System.out.println("-1. Exit the program");
+            String option = input.nextLine();
+            switch (option) {
+                case "1":
+                    registerBuyer();
+                    break;
+                case "2":
+                    loginBuyer();
+                    break;
+                case "0":
+                    main(null);
+                    running = false;
+                    break;
+                case "-1":
+                    System.out.println("Exiting...");
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Invalid option");
+            }
         }
+        input.close();
     }
 
     public static void registerBuyer() {
@@ -71,7 +78,7 @@ public class Main {
 
         System.out.println("Enter your country:");
         String country = input.nextLine();
-        
+
         Buyer newBuyer = new Buyer(name, email, password, phone, address, city, zip, country);
         System.out.println("Here is your profile:");
         System.out.println(newBuyer);
@@ -79,23 +86,215 @@ public class Main {
         Buyer.updateBinaryFile(buyers);
 
         System.out.println("Registration successful!");
-        System.out.println("Here is a list of all buyers:");
-        for (Buyer buyer : buyers) {
-            System.out.println(buyer);
-        }
         System.out.println("====================================");
         System.out.println("Press enter to continue");
         input.nextLine();
     }
 
     public static void loginBuyer() {
-        // Logic for logging in an existing buyer
+        boolean loggedIn = false;
+        Scanner input = new Scanner(System.in);
+        while(!loggedIn) {
+            System.out.println("Enter your email:");
+            String email = input.nextLine();
+            System.out.println("Enter your password:");
+            String password = input.nextLine();
+            for (Buyer buyer : buyers) {
+                if (buyer.getEmail().equalsIgnoreCase(email) && buyer.getPassword().equals(password)) {
+                    System.out.println("Login successful!");
+                    System.out.println("Welcome " + buyer.getName());
+                    loggedIn = true;
+                    boolean running = true;
+                    while (running) {
+                        System.out.println("What would you like to do?");
+                        System.out.println("1. View profile");
+                        System.out.println("2. Update profile");
+                        System.out.println("3. View cart");
+                        System.out.println("4. Browse all product listings");
+                        System.out.println("0. Go back to main menu");
+                        System.out.println("-1. Exit the program");
+                        String option = input.nextLine();
+                        switch (option) {
+                            case "1":
+                                System.out.println(buyer);
+                                break;
+                            case "2":
+                                buyer.updateProfile();
+                                break;
+                            case "3":
+                                buyer.viewCart();
+                                break;
+                            case "4":
+                                Seller.browseAllProducts();
+                                break;
+                            case "0":
+                                main(null);
+                                running = false;
+                                break;
+                            case "-1":
+                                System.out.println("Exiting...");
+                                System.exit(0);
+                                break;
+                            default:
+                                System.out.println("Invalid option");
+                        }
+                    }
+                    break;
+                }
+            }
+            if (!loggedIn) {
+                System.out.println("Login failed!");
+                System.out.println("Would you like to try again? (yes/no)");
+                String tryAgain = input.nextLine();
+                if (tryAgain.equals("no")) {
+                    break;
+                }
+            }
+        }
     }
 
     public static void sellerLogic() {
-        // Logic for seller
+        Scanner input = new Scanner(System.in);
+        boolean running = true;
+        while (running) {
+            System.out.println("Seller Page");
+            System.out.println("1. Register");
+            System.out.println("2. Login");
+            System.out.println("0. Go back to main menu");
+            System.out.println("-1. Exit the program");
+            String option = input.nextLine();
+            switch (option) {
+                case "1":
+                    registerSeller();
+                    break;
+                case "2":
+                    loginSeller();
+                    break;
+                case "0":
+                    main(null);
+                    running = false;
+                    break;
+                case "-1":
+                    System.out.println("Exiting...");
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Invalid option");
+            }
+        }
+        input.close();
     }
 
+    public static void registerSeller() {
+        Scanner input = new Scanner(System.in);
+
+        System.out.println("Enter your name:");
+        String name = input.nextLine();
+
+        System.out.println("Enter your email:");
+        String email = input.nextLine();
+
+        System.out.println("Enter your password:");
+        String password = input.nextLine();
+
+        System.out.println("Enter your phone:");
+        String phone = input.nextLine();
+
+        System.out.println("Enter your address:");
+        String address = input.nextLine();
+
+        System.out.println("Enter your city:");
+        String city = input.nextLine();
+
+        System.out.println("Enter your zip:");
+        int zip = input.nextInt();
+        input.nextLine();
+
+        System.out.println("Enter your country:");
+        String country = input.nextLine();
+
+        Seller newSeller = new Seller(name, email, password, phone, address, city, zip, country);
+        System.out.println("Here is your profile:");
+        System.out.println(newSeller);
+        sellers.add(newSeller);
+        Seller.updateBinaryFile(sellers);
+
+        System.out.println("Registration successful!");
+        System.out.println("====================================");
+        System.out.println("Press enter to continue");
+        input.nextLine();
+    }
+
+    public static void loginSeller() {
+        boolean loggedIn = false;
+        Scanner input = new Scanner(System.in);
+        while(!loggedIn) {
+            System.out.println("Enter your email:");
+            String email = input.nextLine();
+            System.out.println("Enter your password:");
+            String password = input.nextLine();
+            for (Seller seller : sellers) {
+                if (seller.getEmail().equalsIgnoreCase(email) && seller.getPassword().equals(password)) {
+                    System.out.println("Login successful!");
+                    System.out.println("Welcome " + seller.getName());
+                    loggedIn = true;
+                    boolean running = true;
+                    while (running) {
+                        System.out.println("What would you like to do?");
+                        System.out.println("1. View profile");
+                        System.out.println("2. Update profile");
+                        System.out.println("3. Add product");
+                        System.out.println("4. Update product");
+                        System.out.println("5. Remove product");
+                        System.out.println("6. View all products");
+                        System.out.println("0. Go back to main menu");
+                        System.out.println("-1. Exit the program");
+                        String option = input.nextLine();
+                        switch (option) {
+                            case "1":
+                                System.out.println(seller);
+                                break;
+                            case "2":
+                                seller.updateProfile();
+                                break;
+                            case "3":
+                                seller.addProduct();
+                                break;
+                            case "4":
+                                seller.updateProduct();
+                                break;
+                            case "5":
+                                seller.deleteProduct();
+                                break;
+                            case "6":
+                                seller.viewProducts();
+                                break;
+                            case "0":
+                                main(null);
+                                running = false;
+                                break;
+                            case "-1":
+                                System.out.println("Exiting...");
+                                System.exit(0);
+                                break;
+                            default:
+                                System.out.println("Invalid option");
+                        }
+                    }
+                    break;
+                }
+            }
+            if (!loggedIn) {
+                System.out.println("Login failed!");
+                System.out.println("Would you like to try again? (yes/no)");
+                String tryAgain = input.nextLine();
+                if (tryAgain.equals("no")) {
+                    break;
+                }
+            }
+        }
+    }
+    
     public static void courierLogic() {
         // Logic for courier
     }
@@ -154,6 +353,8 @@ public class Main {
                 break;
             default:
                 System.out.println("Invalid option");
+                input.close();
+                adminLogic();
         }
     }
 
@@ -164,10 +365,11 @@ public class Main {
         courierFileReady();
         System.out.println("Welcome to FAST===BAZAAR!");
         System.out.println("Who is using the program?");
-        System.err.println("1. Buyer");
-        System.err.println("2. Seller");
-        System.err.println("3. Courier");
-        System.err.println("4. Admin");
+        System.out.println("1. Buyer");
+        System.out.println("2. Seller");
+        System.out.println("3. Courier");
+        System.out.println("4. Admin");
+        System.err.println("-1. Exit the program");
         String user = input.nextLine();
         switch (user) {
             case "1":
@@ -184,7 +386,7 @@ public class Main {
                 break;
             default:
                 System.out.println("Invalid input");
-            input.close();
+                input.close();
         }
     }
 }

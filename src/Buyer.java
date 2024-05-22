@@ -21,16 +21,25 @@ public class Buyer extends User {
     public ArrayList<BuyerOrder> getOrders() {
         return Orders;
     }
+    public static Buyer loginBuyer(String email, String password) {
+        Main.buyers = readBuyersFromFile();
+        for (Buyer buyer : Main.buyers) {
+            if (buyer.getEmail().equals(email) && buyer.getPassword().equals(password)) {
+                return buyer;
+            }
+        }
+        return null;
+    }
     public void addOrder(BuyerOrder order) {
         Orders.add(order);
-        ArrayList<Buyer> buyers = readBuyersFromFile();
-        for (int i = 0; i < buyers.size(); i++) {
-            if (buyers.get(i).getEmail().equals(this.getEmail())) {
-                buyers.set(i, this);
+        Main.buyers = readBuyersFromFile();
+        for (int i = 0; i < Main.buyers.size(); i++) {
+            if (Main.buyers.get(i).getEmail().equals(this.getEmail())) {
+                Main.buyers.set(i, this);
                 break;
             }
         }
-        updateBinaryFile(buyers);
+        updateBinaryFile(Main.buyers);
     }
     public ArrayList<Product> getCart() {
         return Cart;
@@ -48,14 +57,14 @@ public class Buyer extends User {
     }
     public void removeFromCart(Product product) {
         this.Cart.remove(product);
-        ArrayList<Buyer> buyers = readBuyersFromFile();
-        for (int i = 0; i < buyers.size(); i++) {
-            if (buyers.get(i).getEmail().equals(this.getEmail())) {
-                buyers.set(i, this);
+        Main.buyers = readBuyersFromFile();
+        for (int i = 0; i < Main.buyers.size(); i++) {
+            if (Main.buyers.get(i).getEmail().equals(this.getEmail())) {
+                Main.buyers.set(i, this);
                 break;
             }
         }
-        updateBinaryFile(buyers);
+        updateBinaryFile(Main.buyers);
     }
     public void viewCart() {
         for (Product x : Cart) {
@@ -90,14 +99,14 @@ public class Buyer extends User {
         setZip(zip);
         setCountry(country);
         input.close();    
-        ArrayList<Buyer> buyers = readBuyersFromFile();
-        for (int i = 0; i < buyers.size(); i++) {
-            if (buyers.get(i).getEmail().equals(this.getEmail())) {
-                buyers.set(i, this);
+        Main.buyers = readBuyersFromFile();
+        for (int i = 0; i < Main.buyers.size(); i++) {
+            if (Main.buyers.get(i).getEmail().equals(this.getEmail())) {
+                Main.buyers.set(i, this);
                 break;
             }
         }    
-        updateBinaryFile(buyers);
+        updateBinaryFile(Main.buyers);
     }
     public static void updateBinaryFile(List<Buyer> buyers) {
         try {
