@@ -3,11 +3,19 @@ import java.util.ArrayList;
 public class SellerOrder {
     private Seller seller;
     private Buyer buyer;
+    private String status;
     private ArrayList<Product> products;
     public SellerOrder(Buyer buyer, Seller seller, ArrayList<Product> products) {
         this.buyer = buyer;
         this.seller = seller;
         this.products = products;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+    public void setStatus(String status) {
+        this.status = status;
     }
     public Buyer getBuyer() {
         return buyer;
