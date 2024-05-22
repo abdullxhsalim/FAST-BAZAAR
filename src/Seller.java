@@ -5,22 +5,28 @@ import java.util.List;
 public class Seller extends User {
     private ArrayList<Product> productList;
     private ArrayList<SellerOrder> sellerOrders;
+
     public Seller() {
         super();
         this.productList = new ArrayList<Product>();
         this.sellerOrders = new ArrayList<SellerOrder>();
     }
-    public Seller(String name, String email, String password, String phone, String address, String city, int zip, String country) {
+
+    public Seller(String name, String email, String password, String phone, String address, String city, int zip,
+            String country) {
         super(name, email, password, phone, address, city, zip, country);
         this.productList = new ArrayList<Product>();
         this.sellerOrders = new ArrayList<SellerOrder>();
     }
+
     public ArrayList<SellerOrder> getSellerOrders() {
         return sellerOrders;
     }
+
     public ArrayList<Product> getProductList() {
         return productList;
     }
+
     public void addProduct() {
         System.out.println("Enter name: ");
         String name = Main.input.nextLine();
@@ -49,6 +55,7 @@ public class Seller extends User {
         }
         updateBinaryFile(Main.sellers);
     }
+
     public void addProduct(Product product) {
         productList.add(product);
         Main.sellers = readSellersFromFile();
@@ -60,6 +67,7 @@ public class Seller extends User {
         }
         updateBinaryFile(Main.sellers);
     }
+
     public void removeProduct(Product product) {
         productList.remove(product);
         ArrayList<Seller> sellers = readSellersFromFile();
@@ -71,6 +79,7 @@ public class Seller extends User {
         }
         updateBinaryFile(sellers);
     }
+
     public void updateProduct() {
         viewProducts();
         System.out.println("Enter the ID of the product you want to update: ");
@@ -103,18 +112,19 @@ public class Seller extends User {
                         break;
                     }
                 }
-                updateBinaryFile(sellers);    
+                updateBinaryFile(sellers);
                 return;
             }
         }
         System.out.println("Product with ID " + id + " is not found.");
     }
+
     public void updateProduct(int id, Product updatedProduct) {
         for (int i = 0; i < productList.size(); i++) {
             Product currentProduct = productList.get(i);
             if (currentProduct.getId() == id) {
-                productList.set(i, updatedProduct);    
-                ArrayList<Seller> sellers = readSellersFromFile();    
+                productList.set(i, updatedProduct);
+                ArrayList<Seller> sellers = readSellersFromFile();
                 for (int j = 0; j < sellers.size(); j++) {
                     if (sellers.get(j).getEmail().equals(this.getEmail())) {
                         sellers.set(j, this);
@@ -127,12 +137,15 @@ public class Seller extends User {
         }
         System.out.println("Product with id " + id + " not found.");
     }
+
     public void viewSales() {
         // View sales
     }
+
     public void viewOrders() {
         // View orders
     }
+
     public void deleteProduct() {
         viewProducts();
         System.out.println("Enter the ID of the product you want to delete: ");
@@ -154,11 +167,13 @@ public class Seller extends User {
         }
         System.out.println("Product with ID " + id + " is not found.");
     }
+
     public void viewProducts() {
-        for(Product x: productList) {
+        for (Product x : productList) {
             System.out.println(x);
         }
     }
+
     public void updateProfile() {
         System.out.println("Enter new name: ");
         String name = Main.input.nextLine();
@@ -184,23 +199,26 @@ public class Seller extends User {
         setAddress(address);
         setCity(city);
         setZip(zip);
-        setCountry(country);  
+        setCountry(country);
         Main.sellers = readSellersFromFile();
         for (int i = 0; i < Main.sellers.size(); i++) {
             if (Main.sellers.get(i).getEmail().equals(this.getEmail())) {
                 Main.sellers.set(i, this);
                 break;
             }
-        }    
+        }
         updateBinaryFile(Main.sellers);
     }
+
     public static void updateBinaryFile(List<Seller> sellers) {
         try {
-            File directory = new File("C:\\Users\\Abdullah\\OneDrive - northsouth.edu\\NSU\\241\\Courses\\CSE215L\\Project\\data\\sellers.ser");
-            if (!directory.exists()){
+            File directory = new File(
+                    "C:\\Users\\Abdullah\\OneDrive - northsouth.edu\\NSU\\241\\Courses\\CSE215L\\Project\\data\\sellers.ser");
+            if (!directory.exists()) {
                 directory.mkdirs();
             }
-            FileOutputStream fileOut = new FileOutputStream("C:\\Users\\Abdullah\\OneDrive - northsouth.edu\\NSU\\241\\Courses\\CSE215L\\Project\\data\\sellers.ser");
+            FileOutputStream fileOut = new FileOutputStream(
+                    "C:\\Users\\Abdullah\\OneDrive - northsouth.edu\\NSU\\241\\Courses\\CSE215L\\Project\\data\\sellers.ser");
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeObject(sellers);
             out.close();
@@ -211,29 +229,34 @@ public class Seller extends User {
             System.out.println("Seller file not updated");
         }
     }
+
     public static ArrayList<Seller> readSellersFromFile() {
         ArrayList<Seller> sellers = new ArrayList<>();
-        File file = new File("C:\\Users\\Abdullah\\OneDrive - northsouth.edu\\NSU\\241\\Courses\\CSE215L\\Project\\data\\sellers.ser");
+        File file = new File(
+                "C:\\Users\\Abdullah\\OneDrive - northsouth.edu\\NSU\\241\\Courses\\CSE215L\\Project\\data\\sellers.ser");
         try {
             if (!file.exists() || file.length() == 0) {
                 file.createNewFile();
                 System.err.println("Sellers file created");
                 return sellers;
             }
-            FileInputStream fileIn = new FileInputStream("C:\\Users\\Abdullah\\OneDrive - northsouth.edu\\NSU\\241\\Courses\\CSE215L\\Project\\data\\sellers.ser");
+            FileInputStream fileIn = new FileInputStream(
+                    "C:\\Users\\Abdullah\\OneDrive - northsouth.edu\\NSU\\241\\Courses\\CSE215L\\Project\\data\\sellers.ser");
             ObjectInputStream in = new ObjectInputStream(fileIn);
             Object readObject = in.readObject();
             if (readObject instanceof ArrayList<?>) {
                 @SuppressWarnings("unchecked")
                 ArrayList<Seller> tempSellers = (ArrayList<Seller>) readObject;
                 sellers = tempSellers;
-            } 
-            else {
+            } else {
                 System.out.println("Read object is not an ArrayList");
             }
             for (Seller seller : sellers) {
                 for (Product product : seller.getProductList()) {
                     Main.productIds.add(product.getId());
+                }
+                for(SellerOrder order: seller.getSellerOrders()) {
+                    Main.sellerOrderIDs.add(order.getSellerOrderID());
                 }
             }
             in.close();
@@ -249,25 +272,22 @@ public class Seller extends User {
         }
         return sellers == null ? new ArrayList<>() : sellers;
     }
-    public static void browseAllProducts() {
-        Main.sellers = readSellersFromFile();
-        for (Seller seller : Main.sellers) {
-            seller.viewProducts();
-        }
-    }
+
+
+
     @Override
     public String toString() {
         return "Seller{" +
-            "name='" + getName() + '\'' +
-            ", email='" + getEmail() + '\'' +
-            ", password='" + getPassword() + '\'' +
-            ", phone='" + getPhone() + '\'' +
-            ", address='" + getAddress() + '\'' +
-            ", city='" + getCity() + '\'' +
-            ", zip=" + getZip() +
-            ", country='" + getCountry() + '\'' +
-            ", productList=" + productList +
-            ", sellerOrders=" + sellerOrders +
-            '}';
+                "name='" + getName() + '\'' +
+                ", email='" + getEmail() + '\'' +
+                ", password='" + getPassword() + '\'' +
+                ", phone='" + getPhone() + '\'' +
+                ", address='" + getAddress() + '\'' +
+                ", city='" + getCity() + '\'' +
+                ", zip=" + getZip() +
+                ", country='" + getCountry() + '\'' +
+                ", productList=" + productList +
+                ", sellerOrders=" + sellerOrders +
+                '}';
     }
 }

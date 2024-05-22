@@ -6,6 +6,8 @@ public class Main {
     public static ArrayList<Seller> sellers = new ArrayList<>();
     public static ArrayList<Courier> couriers = new ArrayList<>();
     public static HashSet<Integer> productIds = new HashSet<>();
+    public static HashSet<Integer> buyerOrderIDs = new HashSet<>();
+    public static HashSet<Integer> sellerOrderIDs = new HashSet<>();
     public static Scanner input = new Scanner(System.in);
 
     public static void buyerFileReady() {
@@ -26,7 +28,7 @@ public class Main {
             System.out.println("Buyer Page");
             System.out.println("1. Register");
             System.out.println("2. Login");
-            System.out.println("0. Go back to main menu");
+            System.out.println("0. Go back");
             System.out.println("-1. Exit the program");
             String option = input.nextLine();
             switch (option) {
@@ -102,25 +104,37 @@ public class Main {
                     boolean running = true;
                     while (running) {
                         System.out.println("What would you like to do?");
-                        System.out.println("1. View profile");
-                        System.out.println("2. Update profile");
-                        System.out.println("3. View cart");
-                        System.out.println("4. Browse all product listings");
-                        System.out.println("0. Go back to main menu");
+                        System.out.println("1. Checkout");
+                        System.out.println("2. View cart");
+                        System.out.println("3. Browse all product listings");
+                        System.out.println("4. Search for a product");
+                        System.out.println("5. Add product to cart");
+                        System.out.println("6. View profile");
+                        System.out.println("7. Update profile");
+                        System.out.println("0. Go back");
                         System.out.println("-1. Exit the program");
                         String option = input.nextLine();
                         switch (option) {
                             case "1":
-                                System.out.println(buyer);
+                                buyer.placeOrder();
                                 break;
                             case "2":
-                                buyer.updateProfile();
-                                break;
-                            case "3":
                                 buyer.viewCart();
                                 break;
+                            case "3":
+                                Buyer.browseAllProducts();
+                                break;
                             case "4":
-                                Seller.browseAllProducts();
+                                Buyer.searchProduct();
+                                break;
+                            case "5":
+                                buyer.addToCart();
+                                break;
+                            case "6":
+                                System.out.println(buyer);
+                                break;
+                            case "7":
+                                buyer.updateProfile();
                                 break;
                             case "0":
                                 running = false;
@@ -153,7 +167,7 @@ public class Main {
             System.out.println("Seller Page");
             System.out.println("1. Register");
             System.out.println("2. Login");
-            System.out.println("0. Go back to main menu");
+            System.out.println("0. Go back");
             System.out.println("-1. Exit the program");
             String option = input.nextLine();
             switch (option) {
@@ -235,7 +249,7 @@ public class Main {
                         System.out.println("4. Update product");
                         System.out.println("5. Remove product");
                         System.out.println("6. View all products");
-                        System.out.println("0. Go back to main menu");
+                        System.out.println("0. Go back");
                         System.out.println("-1. Exit the program");
                         String option = input.nextLine();
                         switch (option) {
@@ -283,7 +297,135 @@ public class Main {
     }
     
     public static void courierLogic() {
-        // Logic for courier
+        boolean running = true;
+        while (running) {
+            System.out.println("Courier Page");
+            System.out.println("1. Register");
+            System.out.println("2. Login");
+            System.out.println("0. Go back");
+            System.out.println("-1. Exit the program");
+            String option = input.nextLine();
+            switch (option) {
+                case "1":
+                    registerCourier();
+                    break;
+                case "2":
+                    loginCourier();
+                    break;
+                case "0":
+                    running = false;
+                    break;
+                case "-1":
+                    System.out.println("Exiting...");
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Invalid option");
+            }
+        }
+    }
+
+    public static void registerCourier() {
+        System.out.println("Enter your name:");
+        String name = input.nextLine();
+
+        System.out.println("Enter your email:");
+        String email = input.nextLine();
+
+        System.out.println("Enter your password:");
+        String password = input.nextLine();
+
+        System.out.println("Enter your phone:");
+        String phone = input.nextLine();
+
+        System.out.println("Enter your address:");
+        String address = input.nextLine();
+
+        System.out.println("Enter your city:");
+        String city = input.nextLine();
+
+        System.out.println("Enter your zip:");
+        int zip = input.nextInt();
+        input.nextLine();
+
+        System.out.println("Enter your country:");
+        String country = input.nextLine();
+
+        Courier newCourier = new Courier(name, email, password, phone, address, city, zip, country);
+        System.out.println("Here is your profile:");
+        System.out.println(newCourier);
+        couriers.add(newCourier);
+        Courier.updateBinaryFile(couriers);
+
+        System.out.println("Registration successful!");
+        System.out.println("====================================");
+        System.out.println("Press enter to continue");
+        input.nextLine();
+    }
+
+    public static void loginCourier() {
+        boolean loggedIn = false;
+        while(!loggedIn) {
+            System.out.println("Enter your email:");
+            String email = input.nextLine();
+            System.out.println("Enter your password:");
+            String password = input.nextLine();
+            for (Courier courier : couriers) {
+                if (courier.getEmail().equalsIgnoreCase(email) && courier.getPassword().equals(password)) {
+                    System.out.println("Login successful!");
+                    System.out.println("Welcome " + courier.getName());
+                    loggedIn = true;
+                    boolean running = true;
+                    while (running) {
+                        System.out.println("What would you like to do?");
+                        System.out.println("1. Update order status");
+                        System.out.println("2. View pending orders");
+                        System.out.println("3. View completed orders");
+                        System.out.println("3. View all orders");
+                        System.out.println("4. View profile");
+                        System.out.println("5. Update profile");
+                        System.out.println("0. Go back");
+                        System.out.println("-1. Exit the program");
+                        String option = input.nextLine();
+                        switch (option) {
+                            case "1":
+                                courier.updateOrderStatus();
+                                break;
+                            case "2":
+                                courier.viewPendingOrders();
+                                break;
+                            case "3":
+                                courier.viewCompletedOrders();
+                                break;
+                            case "4":
+                                courier.viewAllOrders();
+                                break;
+                            case "5":
+                                courier.updateProfile();
+                                break;
+                            case "0":
+                                running = false;
+                                break;
+                            case "-1":
+                                System.out.println("Exiting...");
+                                System.exit(0);
+                                break;
+                            default:
+                                System.out.println("Invalid option");
+                        }
+                    }
+                    break;
+                }
+            }
+            if (!loggedIn) {
+                System.out.println("Login failed!");
+                System.out.println("Would you like to try again? (yes/no)");
+                String tryAgain = input.nextLine();
+                if (tryAgain.equals("no")) {
+                    break;
+                }
+            }
+        }
     }
 
     public static void adminLogic() {
@@ -293,7 +435,7 @@ public class Main {
             System.out.println("1. View all buyers");
             System.out.println("2. View all sellers");
             System.out.println("3. View all couriers");
-            System.out.println("0. Go back to main menu");
+            System.out.println("0. Go back");
             System.out.println("-1. Exit the program");
             String option = input.nextLine();
             switch (option) {

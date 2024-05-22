@@ -7,19 +7,24 @@ public class Buyer extends User {
     private static final long serialVersionUID = 1L;
     private ArrayList<BuyerOrder> Orders;
     private ArrayList<Product> Cart;
+
     public Buyer() {
         super();
         this.Orders = new ArrayList<>();
         this.Cart = new ArrayList<>();
     }
-    public Buyer(String name, String email, String password, String phone, String address, String city, int zip, String country) {
+
+    public Buyer(String name, String email, String password, String phone, String address, String city, int zip,
+            String country) {
         super(name, email, password, phone, address, city, zip, country);
         this.Orders = new ArrayList<>();
         this.Cart = new ArrayList<>();
     }
+
     public ArrayList<BuyerOrder> getOrders() {
         return Orders;
     }
+
     public static Buyer loginBuyer(String email, String password) {
         Main.buyers = readBuyersFromFile();
         for (Buyer buyer : Main.buyers) {
@@ -29,6 +34,7 @@ public class Buyer extends User {
         }
         return null;
     }
+
     public void addOrder(BuyerOrder order) {
         Orders.add(order);
         Main.buyers = readBuyersFromFile();
@@ -40,11 +46,46 @@ public class Buyer extends User {
         }
         updateBinaryFile(Main.buyers);
     }
+
     public ArrayList<Product> getCart() {
         return Cart;
     }
+
+    public void placeOrder() {
+        Main.buyers = readBuyersFromFile();
+        BuyerOrder order = new BuyerOrder(this, Cart);
+        System.out.println("Your current cart is:");
+        viewCart();
+        System.out.println("Total cost: " + order.getTotalCost());
+        System.out.println("Type 'confirm' to place order or 'cancel' to cancel order");
+        String choice = Main.input.nextLine();
+        if (choice.equalsIgnoreCase("cancel")) {
+            System.out.println("Order cancelled");
+            return;
+        }
+        System.out.println("Order placed successfully");
+        Cart.clear();
+        addOrder(order);
+    }
+
+    public void addToCart() {
+        Main.buyers = readBuyersFromFile();
+        System.out.println("Enter product ID of the product to be added to your cart: ");
+        int productID = Main.input.nextInt();
+        Main.input.nextLine();
+        Product product = Product.getProductByID(productID);
+        if (product != null)
+            Cart.add(product);
+        for (int i = 0; i < Main.buyers.size(); i++) {
+            if (Main.buyers.get(i).getEmail().equalsIgnoreCase(this.getEmail())) {
+                Main.buyers.set(i, this);
+                break;
+            }
+        }
+    }
+
     public void addToCart(Product product) {
-       Cart.add(product);
+        Cart.add(product);
         ArrayList<Buyer> buyers = readBuyersFromFile();
         for (int i = 0; i < buyers.size(); i++) {
             if (buyers.get(i).getEmail().equals(this.getEmail())) {
@@ -54,6 +95,7 @@ public class Buyer extends User {
         }
         updateBinaryFile(buyers);
     }
+
     public void removeFromCart(Product product) {
         this.Cart.remove(product);
         Main.buyers = readBuyersFromFile();
@@ -65,11 +107,17 @@ public class Buyer extends User {
         }
         updateBinaryFile(Main.buyers);
     }
+
     public void viewCart() {
+        if(Cart.isEmpty()) {
+            System.out.println("Cart is empty!");
+            return;
+        }
         for (Product x : Cart) {
             System.out.println(x);
         }
     }
+
     public void updateProfile() {
         System.out.println("Enter new name: ");
         String name = Main.input.nextLine();
@@ -102,16 +150,19 @@ public class Buyer extends User {
                 Main.buyers.set(i, this);
                 break;
             }
-        }    
+        }
         updateBinaryFile(Main.buyers);
     }
+
     public static void updateBinaryFile(List<Buyer> buyers) {
         try {
-            File directory = new File("C:\\Users\\Abdullah\\OneDrive - northsouth.edu\\NSU\\241\\Courses\\CSE215L\\Project\\data\\buyers.ser");
-            if (!directory.exists()){
+            File directory = new File(
+                    "C:\\Users\\Abdullah\\OneDrive - northsouth.edu\\NSU\\241\\Courses\\CSE215L\\Project\\data\\buyers.ser");
+            if (!directory.exists()) {
                 directory.mkdirs();
             }
-            FileOutputStream fileOut = new FileOutputStream("C:\\Users\\Abdullah\\OneDrive - northsouth.edu\\NSU\\241\\Courses\\CSE215L\\Project\\data\\buyers.ser");
+            FileOutputStream fileOut = new FileOutputStream(
+                    "C:\\Users\\Abdullah\\OneDrive - northsouth.edu\\NSU\\241\\Courses\\CSE215L\\Project\\data\\buyers.ser");
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeObject(buyers);
             out.close();
@@ -122,25 +173,32 @@ public class Buyer extends User {
             System.out.println("Buyers file not updated");
         }
     }
+
     public static ArrayList<Buyer> readBuyersFromFile() {
         ArrayList<Buyer> buyers = new ArrayList<>();
-        File file = new File("C:\\Users\\Abdullah\\OneDrive - northsouth.edu\\NSU\\241\\Courses\\CSE215L\\Project\\data\\buyers.ser");
+        File file = new File(
+                "C:\\Users\\Abdullah\\OneDrive - northsouth.edu\\NSU\\241\\Courses\\CSE215L\\Project\\data\\buyers.ser");
         try {
             if (!file.exists() || file.length() == 0) {
                 file.createNewFile();
                 System.err.println("Buyers file created");
                 return buyers;
             }
-            FileInputStream fileIn = new FileInputStream("C:\\Users\\Abdullah\\OneDrive - northsouth.edu\\NSU\\241\\Courses\\CSE215L\\Project\\data\\buyers.ser");
+            FileInputStream fileIn = new FileInputStream(
+                    "C:\\Users\\Abdullah\\OneDrive - northsouth.edu\\NSU\\241\\Courses\\CSE215L\\Project\\data\\buyers.ser");
             ObjectInputStream in = new ObjectInputStream(fileIn);
             Object readObject = in.readObject();
             if (readObject instanceof ArrayList<?>) {
                 @SuppressWarnings("unchecked")
                 ArrayList<Buyer> tempBuyers = (ArrayList<Buyer>) readObject;
-                buyers = tempBuyers;              
-            } 
-            else {
+                buyers = tempBuyers;
+            } else {
                 System.out.println("Read object is not an ArrayList");
+            }
+            for(Buyer buyer: buyers) {
+                for(BuyerOrder order: buyer.getOrders()) {
+                    Main.buyerOrderIDs.add(order.getBuyerOrderID());
+                }
             }
             in.close();
             fileIn.close();
@@ -151,22 +209,43 @@ public class Buyer extends User {
         } catch (ClassNotFoundException c) {
             System.out.println("Buyer class not found");
             c.printStackTrace();
-        } 
+        }
         return buyers == null ? new ArrayList<>() : buyers;
     }
+
+    public static void browseAllProducts() {
+        Main.sellers = Seller.readSellersFromFile();
+        for (Seller seller : Main.sellers) {
+            seller.viewProducts();
+        }
+    }
+
+    public static void searchProduct() {
+        System.out.println("Enter the name of the product you want to search: ");
+        String name = Main.input.nextLine();
+        Main.sellers = Seller.readSellersFromFile();
+        for (Seller seller : Main.sellers) {
+            for (Product product : seller.getProductList()) {
+                if (product.getName().toLowerCase().contains(name.toLowerCase())) {
+                    System.out.println(product);
+                }
+            }
+        }
+    }
+
     @Override
     public String toString() {
         return "Buyer{" +
-            "Orders=" + Orders +
-            ", Cart=" + Cart +
-            ", name='" + getName() + '\'' +
-            ", email='" + getEmail() + '\'' +
-            ", password='" + getPassword() + '\'' +
-            ", phone='" + getPhone() + '\'' +
-            ", address='" + getAddress() + '\'' +
-            ", city='" + getCity() + '\'' +
-            ", zip=" + getZip() +
-            ", country='" + getCountry() + '\'' +
-            '}';
+                "Orders=" + Orders +
+                ", Cart=" + Cart +
+                ", name='" + getName() + '\'' +
+                ", email='" + getEmail() + '\'' +
+                ", password='" + getPassword() + '\'' +
+                ", phone='" + getPhone() + '\'' +
+                ", address='" + getAddress() + '\'' +
+                ", city='" + getCity() + '\'' +
+                ", zip=" + getZip() +
+                ", country='" + getCountry() + '\'' +
+                '}';
     }
 }
