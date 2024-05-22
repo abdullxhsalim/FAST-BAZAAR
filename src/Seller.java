@@ -1,7 +1,6 @@
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Seller extends User {
     private ArrayList<Product> productList;
@@ -23,23 +22,22 @@ public class Seller extends User {
         return productList;
     }
     public void addProduct() {
-        Scanner input = new Scanner(System.in);
         System.out.println("Enter name: ");
-        String name = input.nextLine();
+        String name = Main.input.nextLine();
         System.out.println("Enter description: ");
-        String description = input.nextLine();
+        String description = Main.input.nextLine();
         System.out.println("Enter price: ");
-        double price = input.nextDouble();
-        input.nextLine();
+        double price = Main.input.nextDouble();
+        Main.input.nextLine();
         System.out.println("Enter quantity: ");
-        int quantity = input.nextInt();
-        input.nextLine();
+        int quantity = Main.input.nextInt();
+        Main.input.nextLine();
         System.out.println("Enter category: ");
-        String category = input.nextLine();
+        String category = Main.input.nextLine();
         System.out.println("Enter image: ");
-        String image = input.nextLine();
+        String image = Main.input.nextLine();
         System.out.println("Enter status: ");
-        String status = input.nextLine();
+        String status = Main.input.nextLine();
         Product product = new Product(name, description, price, quantity, category, this, image, status);
         productList.add(product);
         Main.sellers = readSellersFromFile();
@@ -50,7 +48,6 @@ public class Seller extends User {
             }
         }
         updateBinaryFile(Main.sellers);
-        input.close();
     }
     public void addProduct(Product product) {
         productList.add(product);
@@ -75,29 +72,28 @@ public class Seller extends User {
         updateBinaryFile(sellers);
     }
     public void updateProduct() {
-        Scanner input = new Scanner(System.in);
         viewProducts();
         System.out.println("Enter the ID of the product you want to update: ");
-        int id = input.nextInt();
-        input.nextLine();
+        int id = Main.input.nextInt();
+        Main.input.nextLine();
         for (Product currentProduct : productList) {
             if (currentProduct.getId() == id) {
                 System.out.println("Enter new name: ");
-                String name = input.nextLine();
+                String name = Main.input.nextLine();
                 System.out.println("Enter new description: ");
-                String description = input.nextLine();
+                String description = Main.input.nextLine();
                 System.out.println("Enter new price: ");
-                double price = input.nextDouble();
-                input.nextLine();
+                double price = Main.input.nextDouble();
+                Main.input.nextLine();
                 System.out.println("Enter new quantity: ");
-                int quantity = input.nextInt();
-                input.nextLine();
+                int quantity = Main.input.nextInt();
+                Main.input.nextLine();
                 System.out.println("Enter new category: ");
-                String category = input.nextLine();
+                String category = Main.input.nextLine();
                 System.out.println("Enter new image: ");
-                String image = input.nextLine();
+                String image = Main.input.nextLine();
                 System.out.println("Enter new status: ");
-                String status = input.nextLine();
+                String status = Main.input.nextLine();
                 Product updatedProduct = new Product(name, description, price, quantity, category, this, image, status);
                 productList.set(productList.indexOf(currentProduct), updatedProduct);
                 ArrayList<Seller> sellers = readSellersFromFile();
@@ -108,11 +104,9 @@ public class Seller extends User {
                     }
                 }
                 updateBinaryFile(sellers);    
-                input.close();
                 return;
             }
         }
-        input.close();
         System.out.println("Product with ID " + id + " is not found.");
     }
     public void updateProduct(int id, Product updatedProduct) {
@@ -140,11 +134,10 @@ public class Seller extends User {
         // View orders
     }
     public void deleteProduct() {
-        Scanner input = new Scanner(System.in);
         viewProducts();
         System.out.println("Enter the ID of the product you want to delete: ");
-        int id = input.nextInt();
-        input.nextLine();
+        int id = Main.input.nextInt();
+        Main.input.nextLine();
         for (Product currentProduct : productList) {
             if (currentProduct.getId() == id) {
                 productList.remove(currentProduct);
@@ -156,11 +149,9 @@ public class Seller extends User {
                     }
                 }
                 updateBinaryFile(Main.sellers);
-                input.close();
                 return;
             }
         }
-        input.close();
         System.out.println("Product with ID " + id + " is not found.");
     }
     public void viewProducts() {
@@ -169,24 +160,23 @@ public class Seller extends User {
         }
     }
     public void updateProfile() {
-        Scanner input = new Scanner(System.in);
         System.out.println("Enter new name: ");
-        String name = input.nextLine();
+        String name = Main.input.nextLine();
         System.out.println("Enter new email: ");
-        String email = input.nextLine();
+        String email = Main.input.nextLine();
         System.out.println("Enter new password: ");
-        String password = input.nextLine();
+        String password = Main.input.nextLine();
         System.out.println("Enter new phone: ");
-        String phone = input.nextLine();
+        String phone = Main.input.nextLine();
         System.out.println("Enter new address: ");
-        String address = input.nextLine();
+        String address = Main.input.nextLine();
         System.out.println("Enter new city: ");
-        String city = input.nextLine();
+        String city = Main.input.nextLine();
         System.out.println("Enter new zip: ");
-        int zip = input.nextInt();
-        input.nextLine();
+        int zip = Main.input.nextInt();
+        Main.input.nextLine();
         System.out.println("Enter new country: ");
-        String country = input.nextLine();
+        String country = Main.input.nextLine();
         setName(name);
         setEmail(email);
         setPassword(password);
@@ -194,16 +184,15 @@ public class Seller extends User {
         setAddress(address);
         setCity(city);
         setZip(zip);
-        setCountry(country);
-        input.close();    
-        ArrayList<Seller> sellers = readSellersFromFile();
-        for (int i = 0; i < sellers.size(); i++) {
-            if (sellers.get(i).getEmail().equals(this.getEmail())) {
-                sellers.set(i, this);
+        setCountry(country);  
+        Main.sellers = readSellersFromFile();
+        for (int i = 0; i < Main.sellers.size(); i++) {
+            if (Main.sellers.get(i).getEmail().equals(this.getEmail())) {
+                Main.sellers.set(i, this);
                 break;
             }
         }    
-        updateBinaryFile(sellers);
+        updateBinaryFile(Main.sellers);
     }
     public static void updateBinaryFile(List<Seller> sellers) {
         try {
@@ -228,7 +217,7 @@ public class Seller extends User {
         try {
             if (!file.exists() || file.length() == 0) {
                 file.createNewFile();
-                System.out.println("Sellers file created");
+                System.err.println("Sellers file created");
                 return sellers;
             }
             FileInputStream fileIn = new FileInputStream("C:\\Users\\Abdullah\\OneDrive - northsouth.edu\\NSU\\241\\Courses\\CSE215L\\Project\\data\\sellers.ser");

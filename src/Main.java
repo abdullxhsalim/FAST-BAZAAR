@@ -6,6 +6,7 @@ public class Main {
     public static ArrayList<Seller> sellers = new ArrayList<>();
     public static ArrayList<Courier> couriers = new ArrayList<>();
     public static HashSet<Integer> productIds = new HashSet<>();
+    public static Scanner input = new Scanner(System.in);
 
     public static void buyerFileReady() {
         buyers = Buyer.readBuyersFromFile();
@@ -20,7 +21,6 @@ public class Main {
     }
 
     public static void buyerLogic() {
-        Scanner input = new Scanner(System.in);
         boolean running = true;
         while (running) {
             System.out.println("Buyer Page");
@@ -37,7 +37,6 @@ public class Main {
                     loginBuyer();
                     break;
                 case "0":
-                    main(null);
                     running = false;
                     break;
                 case "-1":
@@ -48,12 +47,9 @@ public class Main {
                     System.out.println("Invalid option");
             }
         }
-        input.close();
     }
 
     public static void registerBuyer() {
-        Scanner input = new Scanner(System.in);
-
         System.out.println("Enter your name:");
         String name = input.nextLine();
 
@@ -93,7 +89,6 @@ public class Main {
 
     public static void loginBuyer() {
         boolean loggedIn = false;
-        Scanner input = new Scanner(System.in);
         while(!loggedIn) {
             System.out.println("Enter your email:");
             String email = input.nextLine();
@@ -128,7 +123,6 @@ public class Main {
                                 Seller.browseAllProducts();
                                 break;
                             case "0":
-                                main(null);
                                 running = false;
                                 break;
                             case "-1":
@@ -154,7 +148,6 @@ public class Main {
     }
 
     public static void sellerLogic() {
-        Scanner input = new Scanner(System.in);
         boolean running = true;
         while (running) {
             System.out.println("Seller Page");
@@ -171,7 +164,6 @@ public class Main {
                     loginSeller();
                     break;
                 case "0":
-                    main(null);
                     running = false;
                     break;
                 case "-1":
@@ -182,12 +174,9 @@ public class Main {
                     System.out.println("Invalid option");
             }
         }
-        input.close();
     }
 
     public static void registerSeller() {
-        Scanner input = new Scanner(System.in);
-
         System.out.println("Enter your name:");
         String name = input.nextLine();
 
@@ -227,7 +216,6 @@ public class Main {
 
     public static void loginSeller() {
         boolean loggedIn = false;
-        Scanner input = new Scanner(System.in);
         while(!loggedIn) {
             System.out.println("Enter your email:");
             String email = input.nextLine();
@@ -270,7 +258,6 @@ public class Main {
                                 seller.viewProducts();
                                 break;
                             case "0":
-                                main(null);
                                 running = false;
                                 break;
                             case "-1":
@@ -300,93 +287,73 @@ public class Main {
     }
 
     public static void adminLogic() {
-        System.out.println("Admin Page");
-        System.out.println("1. View all buyers");
-        System.out.println("2. View all sellers");
-        System.out.println("3. View all couriers");
-        System.out.println();
-        System.err.println("4. View all buyers directly from ArrayList without syncing with file");
-        System.err.println("5. View all sellers directly from ArrayList without syncing with file");
-        System.err.println("6. View all couriers directly from ArrayList without syncing with file");
-        System.out.println("0. Go back to main menu");
-        System.out.println("-1. Exit the program");
-        Scanner input = new Scanner(System.in);
-        String option = input.nextLine();
-        Admin admin = new Admin();
-        switch (option) {
-            case "1":
-                admin.printAllBuyers();
-                adminLogic();
-                break;
-            case "2":
-                admin.printAllSellers();
-                adminLogic();
-                break;
-            case "3":
-                admin.printAllCouriers();
-                adminLogic();
-                break;
-            case "4":
-                for (Buyer buyer : buyers) {
-                    System.out.println(buyer);
-                }
-                adminLogic();
-                break;
-            case "5":
-                for (Seller seller : sellers) {
-                    System.out.println(seller);
-                }
-                adminLogic();
-                break;
-            case "6":
-                for (Courier courier : couriers) {
-                    System.out.println(courier);
-                }
-                adminLogic();
-                break;
-            case "0":
-                main(null);
-                break;
-            case "-1":
-                System.out.println("Exiting...");
-                System.exit(0);
-                break;
-            default:
-                System.out.println("Invalid option");
-                input.close();
-                adminLogic();
+        boolean running = true;
+        while (running) {
+            System.out.println("Admin Page");
+            System.out.println("1. View all buyers");
+            System.out.println("2. View all sellers");
+            System.out.println("3. View all couriers");
+            System.out.println("0. Go back to main menu");
+            System.out.println("-1. Exit the program");
+            String option = input.nextLine();
+            switch (option) {
+                case "1":
+                    Admin.printAllBuyers();
+                    break;
+                case "2":
+                    Admin.printAllSellers();
+                    break;
+                case "3":
+                    Admin.printAllCouriers();
+                    break;
+                case "0":
+                    running = false;
+                    break;
+                case "-1":
+                    System.out.println("Exiting...");
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Invalid option");
+            }
         }
     }
 
     public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
         buyerFileReady();
         sellerFileReady();
         courierFileReady();
-        System.out.println("Welcome to FAST===BAZAAR!");
-        System.out.println("Who is using the program?");
-        System.out.println("1. Buyer");
-        System.out.println("2. Seller");
-        System.out.println("3. Courier");
-        System.out.println("4. Admin");
-        System.err.println("-1. Exit the program");
-        String user = input.nextLine();
-        switch (user) {
-            case "1":
-                buyerLogic();
-                break;
-            case "2":
-                sellerLogic();
-                break;
-            case "3":
-                courierLogic();
-                break;
-            case "4":
-                adminLogic();
-                break;
-            default:
-                System.out.println("Invalid input");
-                input.close();
+        boolean running = true;
+        while (running) {
+            System.out.println("Welcome to FAST===BAZAAR!");
+            System.out.println("Who is using the program?");
+            System.out.println("1. Buyer");
+            System.out.println("2. Seller");
+            System.out.println("3. Courier");
+            System.out.println("4. Admin");
+            System.err.println("-1. Exit the program");
+            String user = input.nextLine();
+            switch (user) {
+                case "1":
+                    buyerLogic();
+                    break;
+                case "2":
+                    sellerLogic();
+                    break;
+                case "3":
+                    courierLogic();
+                    break;
+                case "4":
+                    adminLogic();
+                    break;
+                case "-1":
+                    System.out.println("Exiting...");
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Invalid input");
+            }
         }
     }
+
 }

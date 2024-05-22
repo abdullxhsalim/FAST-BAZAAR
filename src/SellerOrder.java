@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class SellerOrder {
+public class SellerOrder implements Serializable {
     private Seller seller;
     private Buyer buyer;
     private String status;

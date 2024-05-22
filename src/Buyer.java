@@ -1,7 +1,6 @@
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Buyer extends User {
     @Serial
@@ -72,24 +71,23 @@ public class Buyer extends User {
         }
     }
     public void updateProfile() {
-        Scanner input = new Scanner(System.in);
         System.out.println("Enter new name: ");
-        String name = input.nextLine();
+        String name = Main.input.nextLine();
         System.out.println("Enter new email: ");
-        String email = input.nextLine();
+        String email = Main.input.nextLine();
         System.out.println("Enter new password: ");
-        String password = input.nextLine();
+        String password = Main.input.nextLine();
         System.out.println("Enter new phone: ");
-        String phone = input.nextLine();
+        String phone = Main.input.nextLine();
         System.out.println("Enter new address: ");
-        String address = input.nextLine();
+        String address = Main.input.nextLine();
         System.out.println("Enter new city: ");
-        String city = input.nextLine();
+        String city = Main.input.nextLine();
         System.out.println("Enter new zip: ");
-        int zip = input.nextInt();
-        input.nextLine();
+        int zip = Main.input.nextInt();
+        Main.input.nextLine();
         System.out.println("Enter new country: ");
-        String country = input.nextLine();
+        String country = Main.input.nextLine();
         setName(name);
         setEmail(email);
         setPassword(password);
@@ -98,7 +96,6 @@ public class Buyer extends User {
         setCity(city);
         setZip(zip);
         setCountry(country);
-        input.close();    
         Main.buyers = readBuyersFromFile();
         for (int i = 0; i < Main.buyers.size(); i++) {
             if (Main.buyers.get(i).getEmail().equals(this.getEmail())) {
@@ -131,7 +128,7 @@ public class Buyer extends User {
         try {
             if (!file.exists() || file.length() == 0) {
                 file.createNewFile();
-                System.out.println("Buyers file created");
+                System.err.println("Buyers file created");
                 return buyers;
             }
             FileInputStream fileIn = new FileInputStream("C:\\Users\\Abdullah\\OneDrive - northsouth.edu\\NSU\\241\\Courses\\CSE215L\\Project\\data\\buyers.ser");

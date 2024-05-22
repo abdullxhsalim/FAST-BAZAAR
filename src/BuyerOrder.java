@@ -1,9 +1,10 @@
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BuyerOrder {
+public class BuyerOrder implements Serializable {
     ArrayList<Product> orderedProducts;
     private Buyer buyer;
     private ArrayList<Seller> sellers;

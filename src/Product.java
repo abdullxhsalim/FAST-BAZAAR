@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Random;
 
-public class Product {
+public class Product implements Serializable {
     private String name;
     private String description;
     private double price;

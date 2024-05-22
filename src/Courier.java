@@ -50,7 +50,7 @@ public class Courier extends User {
         try {
             if (!file.exists() || file.length() == 0) {
                 file.createNewFile();
-                System.out.println("Couriers file created");
+                System.err.println("Couriers file created");
                 return couriers;
             }
             FileInputStream fileIn = new FileInputStream(
@@ -78,24 +78,23 @@ public class Courier extends User {
     }
 
     public void updateProfile() {
-        Scanner input = new Scanner(System.in);
         System.out.println("Enter new name: ");
-        String name = input.nextLine();
+        String name = Main.input.nextLine();
         System.out.println("Enter new email: ");
-        String email = input.nextLine();
+        String email = Main.input.nextLine();
         System.out.println("Enter new password: ");
-        String password = input.nextLine();
+        String password = Main.input.nextLine();
         System.out.println("Enter new phone: ");
-        String phone = input.nextLine();
+        String phone = Main.input.nextLine();
         System.out.println("Enter new address: ");
-        String address = input.nextLine();
+        String address = Main.input.nextLine();
         System.out.println("Enter new city: ");
-        String city = input.nextLine();
+        String city = Main.input.nextLine();
         System.out.println("Enter new zip: ");
-        int zip = input.nextInt();
-        input.nextLine();
+        int zip = Main.input.nextInt();
+        Main.input.nextLine();
         System.out.println("Enter new country: ");
-        String country = input.nextLine();
+        String country = Main.input.nextLine();
         setName(name);
         setEmail(email);
         setPassword(password);
@@ -104,7 +103,6 @@ public class Courier extends User {
         setCity(city);
         setZip(zip);
         setCountry(country);
-        input.close();
         Main.couriers = readCouriersFromFile();
         for (int i = 0; i < Main.couriers.size(); i++) {
             if (Main.couriers.get(i).getEmail().equals(this.getEmail())) {

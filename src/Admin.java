@@ -1,21 +1,21 @@
 import java.util.*;
 
 public class Admin {
-    public void printAllBuyers() {
-        ArrayList<Buyer> buyers = Buyer.readBuyersFromFile();
-        for (Buyer buyer : buyers) {
+    public static void printAllBuyers() {
+        Main.buyers = Buyer.readBuyersFromFile();
+        for (Buyer buyer : Main.buyers) {
             System.out.println(buyer);
         }
     }
-    public void printAllSellers() {
-        ArrayList<Seller> sellers = Seller.readSellersFromFile();
-        for (Seller seller : sellers) {
+    public static void printAllSellers() {
+        Main.sellers = Seller.readSellersFromFile();
+        for (Seller seller : Main.sellers) {
             System.out.println(seller);
         }
     }
-    public void printAllCouriers() {
-        ArrayList<Courier> couriers = Courier.readCouriersFromFile();
-        for (Courier courier : couriers) {
+    public static void printAllCouriers() {
+        Main.couriers = Courier.readCouriersFromFile();
+        for (Courier courier : Main.couriers) {
             System.out.println(courier);
         }
     }
