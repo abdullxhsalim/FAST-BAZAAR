@@ -103,7 +103,7 @@ public class BuyerOrder implements Serializable {
     @Override
     public String toString() {
         return "BuyerOrder {\n" +
-                "  buyer: " + buyer + ",\n" +
+                "  buyer: " + buyer.getName() + ",\n" +
                 "  sellers: " + sellers + ",\n" +
                 "  courier: " + courier + ",\n" +
                 "  status: " + status + ",\n" +
