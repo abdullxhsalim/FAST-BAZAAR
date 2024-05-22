@@ -54,8 +54,13 @@ public class BuyerOrder implements Serializable {
             if (index != -1) {
                 Main.sellers.set(index, seller.getKey());
             }
+            Courier courier = Courier.findCourierWithLeastDeliveries();
+            if (courier != null) {
+                courier.getOrders().add(sellerOrder);
+            }
         }
         Seller.updateBinaryFile(Main.sellers);
+        Courier.updateBinaryFile(Main.couriers);
     }
 
     public ArrayList<Product> getOrderedProducts() {
@@ -141,7 +146,7 @@ public class BuyerOrder implements Serializable {
         return "BuyerOrder {\n" +
                 "  buyer: " + buyer.getName() + ",\n" +
                 "  sellers: " + sellers + ",\n" +
-                "  courier: " + courier + ",\n" +
+                "  courier: " + courier.getName() + ",\n" +
                 "  status: " + status + ",\n" +
                 "  id: " + orderID + ",\n" +
                 "  orderPlacementTime: " + orderPlacementTime + ",\n" +

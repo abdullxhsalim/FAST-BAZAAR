@@ -185,6 +185,22 @@ public class Courier extends User {
         }
     }
 
+    public static Courier findCourierWithLeastDeliveries() {
+        Main.couriers = Courier.readCouriersFromFile();
+        Courier courierWithLeastDeliveries = null;
+        int minDeliveries = Integer.MAX_VALUE;
+    
+        for (Courier courier : Main.couriers) {
+            int deliveries = courier.getNumberOfOrdersToBeDelivered();
+            if (deliveries < minDeliveries) {
+                minDeliveries = deliveries;
+                courierWithLeastDeliveries = courier;
+            }
+        }
+        
+        return courierWithLeastDeliveries;
+    }
+
     @Override
     public String toString() {
         return "Courier{" +
