@@ -93,4 +93,27 @@ public class BuyerOrder {
     public void setStatus(String status) {
         this.status = status;
     }
+    public void setCourier(Courier courier) {
+        this.courier = courier;
+    }
+    public void setTotalCost(double totalCost) {
+        this.totalCost = totalCost;
+    }
+    @Override
+    public String toString() {
+        return "BuyerOrder {\n" +
+                "  buyer: " + buyer + ",\n" +
+                "  sellers: " + sellers + ",\n" +
+                "  courier: " + courier + ",\n" +
+                "  status: " + status + ",\n" +
+                "  id: " + id + ",\n" +
+                "  orderPlacementTime: " + orderPlacementTime + ",\n" +
+                "  orderDeliveryTime: " + orderDeliveryTime + ",\n" +
+                "  totalCost: " + totalCost + ",\n" +
+                "  address: " + address + ",\n" +
+                "  city: " + city + ",\n" +
+                "  zip: " + zip + ",\n" +
+                "  country: " + country + "\n" +
+                "}";
+    }
 }

@@ -5,9 +5,14 @@ import java.util.Scanner;
 
 public class Buyer extends User implements Serializable {
     @Serial
-    private static final long serialVersionUID = 8061711001070044403L;
+    private static final long serialVersionUID = 1L;
     private ArrayList<BuyerOrder> Orders;
     private ArrayList<Product> Cart;
+    public Buyer() {
+        super();
+        this.Orders = new ArrayList<>();
+        this.Cart = new ArrayList<>();
+    }
     public Buyer(String name, String email, String password, String phone, String address, String city, int zip, String country) {
         super(name, email, password, phone, address, city, zip, country);
         this.Orders = new ArrayList<>();
@@ -105,17 +110,20 @@ public class Buyer extends User implements Serializable {
             out.writeObject(buyers);
             out.close();
             fileOut.close();
+            System.out.println("Buyers file updated");
         } catch (IOException i) {
             i.printStackTrace();
+            System.out.println("Buyers file not updated");
         }
     }
     public static ArrayList<Buyer> readBuyersFromFile() {
-        ArrayList<Buyer> buyers = null;
+        ArrayList<Buyer> buyers = new ArrayList<>();
         File file = new File("C:\\Users\\Abdullah\\OneDrive - northsouth.edu\\NSU\\241\\Courses\\CSE215L\\Project\\data\\buyers.ser");
         try {
-            if (!file.exists()) {
+            if (!file.exists() || file.length() == 0) {
                 file.createNewFile();
                 System.out.println("Buyers file created");
+                return buyers;
             }
             FileInputStream fileIn = new FileInputStream("C:\\Users\\Abdullah\\OneDrive - northsouth.edu\\NSU\\241\\Courses\\CSE215L\\Project\\data\\buyers.ser");
             ObjectInputStream in = new ObjectInputStream(fileIn);
@@ -123,7 +131,7 @@ public class Buyer extends User implements Serializable {
             if (readObject instanceof ArrayList<?>) {
                 @SuppressWarnings("unchecked")
                 ArrayList<Buyer> tempBuyers = (ArrayList<Buyer>) readObject;
-                buyers = tempBuyers;
+                buyers = tempBuyers;              
             } 
             else {
                 System.out.println("Read object is not an ArrayList");
@@ -139,5 +147,20 @@ public class Buyer extends User implements Serializable {
             c.printStackTrace();
         } 
         return buyers == null ? new ArrayList<>() : buyers;
+    }
+    @Override
+    public String toString() {
+        return "Buyer{" +
+            "Orders=" + Orders +
+            ", Cart=" + Cart +
+            ", name='" + getName() + '\'' +
+            ", email='" + getEmail() + '\'' +
+            ", password='" + getPassword() + '\'' +
+            ", phone='" + getPhone() + '\'' +
+            ", address='" + getAddress() + '\'' +
+            ", city='" + getCity() + '\'' +
+            ", zip=" + getZip() +
+            ", country='" + getCountry() + '\'' +
+            '}';
     }
 }

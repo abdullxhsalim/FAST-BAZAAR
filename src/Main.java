@@ -15,11 +15,12 @@ public class Main {
     }
 
     public static void buyerLogic() {
-
         Scanner input = new Scanner(System.in);
         System.out.println("Buyer Page");
         System.out.println("1. Register");
         System.out.println("2. Login");
+        System.out.println("0. Go back to main menu");
+        System.out.println("-1. Exit the program");
         String option = input.nextLine();
         switch (option) {
             case "1":
@@ -29,6 +30,13 @@ public class Main {
             case "2":
                 loginBuyer();
                 buyerLogic();
+                break;
+            case "0":
+                main(null);
+                break;
+            case "-1":
+                System.out.println("Exiting...");
+                System.exit(0);
                 break;
             default:
                 System.out.println("Invalid option");
@@ -65,11 +73,16 @@ public class Main {
         String country = input.nextLine();
         
         Buyer newBuyer = new Buyer(name, email, password, phone, address, city, zip, country);
+        System.out.println("Here is your profile:");
+        System.out.println(newBuyer);
         buyers.add(newBuyer);
         Buyer.updateBinaryFile(buyers);
 
         System.out.println("Registration successful!");
-        System.out.println("You can now login");
+        System.out.println("Here is a list of all buyers:");
+        for (Buyer buyer : buyers) {
+            System.out.println(buyer);
+        }
         System.out.println("====================================");
         System.out.println("Press enter to continue");
         input.nextLine();
@@ -88,7 +101,60 @@ public class Main {
     }
 
     public static void adminLogic() {
-        // Logic for admin
+        System.out.println("Admin Page");
+        System.out.println("1. View all buyers");
+        System.out.println("2. View all sellers");
+        System.out.println("3. View all couriers");
+        System.out.println();
+        System.err.println("4. View all buyers directly from ArrayList without syncing with file");
+        System.err.println("5. View all sellers directly from ArrayList without syncing with file");
+        System.err.println("6. View all couriers directly from ArrayList without syncing with file");
+        System.out.println("0. Go back to main menu");
+        System.out.println("-1. Exit the program");
+        Scanner input = new Scanner(System.in);
+        String option = input.nextLine();
+        Admin admin = new Admin();
+        switch (option) {
+            case "1":
+                admin.printAllBuyers();
+                adminLogic();
+                break;
+            case "2":
+                admin.printAllSellers();
+                adminLogic();
+                break;
+            case "3":
+                admin.printAllCouriers();
+                adminLogic();
+                break;
+            case "4":
+                for (Buyer buyer : buyers) {
+                    System.out.println(buyer);
+                }
+                adminLogic();
+                break;
+            case "5":
+                for (Seller seller : sellers) {
+                    System.out.println(seller);
+                }
+                adminLogic();
+                break;
+            case "6":
+                for (Courier courier : couriers) {
+                    System.out.println(courier);
+                }
+                adminLogic();
+                break;
+            case "0":
+                main(null);
+                break;
+            case "-1":
+                System.out.println("Exiting...");
+                System.exit(0);
+                break;
+            default:
+                System.out.println("Invalid option");
+        }
     }
 
     public static void main(String[] args) {

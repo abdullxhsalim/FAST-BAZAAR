@@ -6,6 +6,11 @@ import java.util.Scanner;
 public class Seller extends User implements Serializable {
     private ArrayList<Product> productList;
     private ArrayList<SellerOrder> sellerOrders;
+    public Seller() {
+        super();
+        this.productList = new ArrayList<Product>();
+        this.sellerOrders = new ArrayList<SellerOrder>();
+    }
     public Seller(String name, String email, String password, String phone, String address, String city, int zip, String country) {
         super(name, email, password, phone, address, city, zip, country);
         this.productList = new ArrayList<Product>();
@@ -156,17 +161,20 @@ public class Seller extends User implements Serializable {
             out.writeObject(sellers);
             out.close();
             fileOut.close();
+            System.out.println("Seller file updated");
         } catch (IOException i) {
             i.printStackTrace();
+            System.out.println("Seller file not updated");
         }
     }
     public static ArrayList<Seller> readSellersFromFile() {
-        ArrayList<Seller> sellers = null;
+        ArrayList<Seller> sellers = new ArrayList<>();
         File file = new File("C:\\Users\\Abdullah\\OneDrive - northsouth.edu\\NSU\\241\\Courses\\CSE215L\\Project\\data\\sellers.ser");
         try {
-            if (!file.exists()) {
+            if (!file.exists() || file.length() == 0) {
                 file.createNewFile();
                 System.out.println("Sellers file created");
+                return sellers;
             }
             FileInputStream fileIn = new FileInputStream("C:\\Users\\Abdullah\\OneDrive - northsouth.edu\\NSU\\241\\Courses\\CSE215L\\Project\\data\\sellers.ser");
             ObjectInputStream in = new ObjectInputStream(fileIn);
@@ -191,5 +199,20 @@ public class Seller extends User implements Serializable {
             c.printStackTrace();
         }
         return sellers == null ? new ArrayList<>() : sellers;
+    }
+    @Override
+    public String toString() {
+        return "Seller{" +
+            "name='" + getName() + '\'' +
+            ", email='" + getEmail() + '\'' +
+            ", password='" + getPassword() + '\'' +
+            ", phone='" + getPhone() + '\'' +
+            ", address='" + getAddress() + '\'' +
+            ", city='" + getCity() + '\'' +
+            ", zip=" + getZip() +
+            ", country='" + getCountry() + '\'' +
+            ", productList=" + productList +
+            ", sellerOrders=" + sellerOrders +
+            '}';
     }
 }
