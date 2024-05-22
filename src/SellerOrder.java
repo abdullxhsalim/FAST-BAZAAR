@@ -36,4 +36,12 @@ public class SellerOrder implements Serializable {
     public void setProducts(ArrayList<Product> products) {
         this.products = products;
     }
+    public String toString() {
+        return "SellerOrder{" +
+                "seller=" + seller.getName() +
+                ", buyer=" + buyer.getName() +
+                ", status='" + status + '\'' +
+                ", products=" + products +
+                '}';
+    }
 }

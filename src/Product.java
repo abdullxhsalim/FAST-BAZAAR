@@ -103,7 +103,7 @@ public class Product implements Serializable {
                 "  price: " + price + ",\n" +
                 "  quantity: " + quantity + ",\n" +
                 "  category: " + category + ",\n" +
-                "  seller: " + seller + ",\n" +
+                "  seller: " + seller.getName() + ",\n" +
                 "  image: " + image + ",\n" +
                 "  status: " + status + ",\n" +
                 "  dateTime: " + dateTime + ",\n" +
