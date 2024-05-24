@@ -380,9 +380,9 @@ public class Main {
                         System.out.println("1. Update order status");
                         System.out.println("2. View pending orders");
                         System.out.println("3. View completed orders");
-                        System.out.println("3. View all orders");
-                        System.out.println("4. View profile");
-                        System.out.println("5. Update profile");
+                        System.out.println("4. View all orders");
+                        System.out.println("5. View profile");
+                        System.out.println("6. Update profile");
                         System.out.println("0. Go back");
                         System.out.println("-1. Exit the program");
                         String option = input.nextLine();

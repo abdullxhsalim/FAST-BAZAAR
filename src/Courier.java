@@ -5,6 +5,10 @@ public class Courier extends User {
     ArrayList<SellerOrder> orders = new ArrayList<>();
     private int numberOfOrdersToBeDelivered;
 
+    public void setOrders(ArrayList<SellerOrder> orders) {
+        this.orders = orders;
+    }
+
     public Courier() {
         super();
         orders = new ArrayList<>();
@@ -165,7 +169,7 @@ public class Courier extends User {
 
     public void viewPendingOrders() {
         for (int i = 0; i < orders.size(); i++) {
-            if(orders.get(i).getStatus().equals("Pending")) {
+            if(!(orders.get(i).getStatus().equalsIgnoreCase("Delivered"))) {
                 System.out.println(orders.get(i));
             }
         }
@@ -189,7 +193,7 @@ public class Courier extends User {
         Main.couriers = Courier.readCouriersFromFile();
         Courier courierWithLeastDeliveries = null;
         int minDeliveries = Integer.MAX_VALUE;
-    
+
         for (Courier courier : Main.couriers) {
             int deliveries = courier.getNumberOfOrdersToBeDelivered();
             if (deliveries < minDeliveries) {
@@ -197,7 +201,7 @@ public class Courier extends User {
                 courierWithLeastDeliveries = courier;
             }
         }
-        
+
         return courierWithLeastDeliveries;
     }
 

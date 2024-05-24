@@ -54,7 +54,7 @@ public class BuyerOrder implements Serializable {
             if (index != -1) {
                 Main.sellers.set(index, seller.getKey());
             }
-            Courier courier = Courier.findCourierWithLeastDeliveries();
+            this.courier = Courier.findCourierWithLeastDeliveries();
             if (courier != null) {
                 courier.getOrders().add(sellerOrder);
             }
