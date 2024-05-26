@@ -51,17 +51,48 @@ public class Main {
     }
 
     public static void registerBuyer() {
+        String name;
+        while(true){
         System.out.println("Enter your name:");
-        String name = input.nextLine();
-
+        String temp = input.nextLine();
+        try{
+            Exceptions.emailValidator(temp);
+            name=temp;
+            break;
+        }catch(Exception e){
+            System.out.println("Invalid Name");
+        }
+       }
+        String email;
+        while(true){
         System.out.println("Enter your email:");
-        String email = input.nextLine();
+        String temp = input.nextLine();
+        try{
+            Exceptions.emailValidator(temp);
+            email=temp;
+            break;
+        }catch(Exception e){
+            System.out.println("Invalid email");
+        }
+        
+     }
 
         System.out.println("Enter your password:");
         String password = input.nextLine();
 
-        System.out.println("Enter your phone:");
-        String phone = input.nextLine();
+        String phone;
+        while(true){
+        System.out.println("Enter your phone number:");
+        String temp = input.nextLine();
+        try{
+            Exceptions.emailValidator(temp);
+            phone=temp;
+            break;
+        }catch(Exception e){
+            System.out.println("Invalid phone number");
+        }
+        
+     }
 
         System.out.println("Enter your address:");
         String address = input.nextLine();
@@ -190,17 +221,49 @@ public class Main {
     }
 
     public static void registerSeller() {
-        System.out.println("Enter your name:");
-        String name = input.nextLine();
 
+        String name;
+        while(true){
+        System.out.println("Enter your name:");
+        String temp = input.nextLine();
+        try{
+            Exceptions.emailValidator(temp);
+            name=temp;
+            break;
+        }catch(Exception e){
+            System.out.println("Invalid Name");
+        }
+       }
+
+        String email;
+        while(true){
         System.out.println("Enter your email:");
-        String email = input.nextLine();
+        String temp = input.nextLine();
+        try{
+            Exceptions.emailValidator(temp);
+            email=temp;
+            break;
+        }catch(Exception e){
+            System.out.println("Invalid email");
+        }
+       }
 
         System.out.println("Enter your password:");
         String password = input.nextLine();
 
-        System.out.println("Enter your phone:");
-        String phone = input.nextLine();
+        String phone;
+        while(true){
+        System.out.println("Enter your phone number:");
+        String temp = input.nextLine();
+        try{
+            Exceptions.emailValidator(temp);
+            phone=temp;
+            break;
+        }catch(Exception e){
+            System.out.println("Invalid phone number");
+        }
+        
+     }
 
         System.out.println("Enter your address:");
         String address = input.nextLine();
@@ -325,17 +388,48 @@ public class Main {
     }
 
     public static void registerCourier() {
+        String name;
+        while(true){
         System.out.println("Enter your name:");
-        String name = input.nextLine();
+        String temp = input.nextLine();
+        try{
+            Exceptions.emailValidator(temp);
+            name=temp;
+            break;
+        }catch(Exception e){
+            System.out.println("Invalid Name");
+        }
+       }
 
+        String email;
+        while(true){
         System.out.println("Enter your email:");
-        String email = input.nextLine();
+        String temp = input.nextLine();
+        try{
+            Exceptions.emailValidator(temp);
+            email=temp;
+            break;
+        }catch(Exception e){
+            System.out.println("Invalid email");
+        }
+       }
 
         System.out.println("Enter your password:");
         String password = input.nextLine();
 
-        System.out.println("Enter your phone:");
-        String phone = input.nextLine();
+        String phone;
+        while(true){
+        System.out.println("Enter your phone number:");
+        String temp = input.nextLine();
+        try{
+            Exceptions.emailValidator(temp);
+            phone=temp;
+            break;
+        }catch(Exception e){
+            System.out.println("Invalid phone number");
+        }
+        
+     }
 
         System.out.println("Enter your address:");
         String address = input.nextLine();
