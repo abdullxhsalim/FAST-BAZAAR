@@ -1,10 +1,12 @@
+package com.example.model;
+
 import java.util.*;
 
 public class Main {
     public static ArrayList<Buyer> buyers = new ArrayList<>();
     public static ArrayList<Seller> sellers = new ArrayList<>();
     public static ArrayList<Courier> couriers = new ArrayList<>();
-    public static HashSet<Integer> productIds = new HashSet<>();
+    public static HashSet<Integer> productIDs = new HashSet<>();
     public static HashSet<Integer> buyerOrderIDs = new HashSet<>();
     public static HashSet<Integer> sellerOrderIDs = new HashSet<>();
     public static Scanner input = new Scanner(System.in);

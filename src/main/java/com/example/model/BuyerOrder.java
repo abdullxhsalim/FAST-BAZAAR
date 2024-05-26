@@ -1,3 +1,5 @@
+package com.example.model;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -50,17 +52,17 @@ public class BuyerOrder implements Serializable {
         for (Map.Entry<Seller, ArrayList<Product>> seller : sellerProducts.entrySet()) {
             SellerOrder sellerOrder = new SellerOrder(this.buyer, seller.getKey(), seller.getValue());
             seller.getKey().getSellerOrders().add(sellerOrder);
-            int index = Main.sellers.indexOf(seller.getKey());
+            int index = com.example.view.Main.sellers.indexOf(seller.getKey());
             if (index != -1) {
-                Main.sellers.set(index, seller.getKey());
+                com.example.view.Main.sellers.set(index, seller.getKey());
             }
             this.courier = Courier.findCourierWithLeastDeliveries();
             if (courier != null) {
                 courier.getOrders().add(sellerOrder);
             }
         }
-        Seller.updateBinaryFile(Main.sellers);
-        Courier.updateBinaryFile(Main.couriers);
+        Seller.updateBinaryFile(com.example.view.Main.sellers);
+        Courier.updateBinaryFile(com.example.view.Main.couriers);
     }
 
     public ArrayList<Product> getOrderedProducts() {

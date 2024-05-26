@@ -1,3 +1,5 @@
+package com.example.model;
+
 import java.util.*;
 import java.io.*;
 
@@ -39,14 +41,14 @@ public class Courier extends User {
                 break;
             }
         }
-        Main.couriers = readCouriersFromFile();
-        for (int i = 0; i < Main.couriers.size(); i++) {
-            if (Main.couriers.get(i).getEmail().equals(this.getEmail())) {
-                Main.couriers.set(i, this);
+        com.example.view.Main.couriers = readCouriersFromFile();
+        for (int i = 0; i < com.example.view.Main.couriers.size(); i++) {
+            if (com.example.view.Main.couriers.get(i).getEmail().equals(this.getEmail())) {
+                com.example.view.Main.couriers.set(i, this);
                 break;
             }
         }
-        updateBinaryFile(Main.couriers);
+        updateBinaryFile(com.example.view.Main.couriers);
     }
 
     public void addOrderToDeliver(SellerOrder order) {
@@ -59,12 +61,12 @@ public class Courier extends User {
 
     public static void updateBinaryFile(List<Courier> couriers) {
         try {
-            File directory = new File("C:\\Users\\Abdullah\\OneDrive - northsouth.edu\\NSU\\241\\Courses\\CSE215L\\Project\\data\\couriers.ser");
+            File directory = new File("src\\main\\resources\\couriers.ser");
             if (!directory.exists()) {
                 directory.mkdirs();
             }
-            FileOutputStream fileOut = new FileOutputStream(
-                    "C:\\Users\\Abdullah\\OneDrive - northsouth.edu\\NSU\\241\\Courses\\CSE215L\\Project\\data\\couriers.ser");
+            FileOutputStream fileOut = new FileOutputStream
+                    ("src\\main\\resources\\couriers.ser");
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeObject(couriers);
             out.close();
@@ -78,16 +80,14 @@ public class Courier extends User {
 
     public static ArrayList<Courier> readCouriersFromFile() {
         ArrayList<Courier> couriers = new ArrayList<>();
-        File file = new File(
-                "C:\\Users\\Abdullah\\OneDrive - northsouth.edu\\NSU\\241\\Courses\\CSE215L\\Project\\data\\couriers.ser");
+        File file = new File("src\\main\\resources\\couriers.ser");
         try {
             if (!file.exists() || file.length() == 0) {
                 file.createNewFile();
                 System.err.println("Couriers file created");
                 return couriers;
             }
-            FileInputStream fileIn = new FileInputStream(
-                    "C:\\Users\\Abdullah\\OneDrive - northsouth.edu\\NSU\\241\\Courses\\CSE215L\\Project\\data\\couriers.ser");
+            FileInputStream fileIn = new FileInputStream("src\\main\\resources\\couriers.ser");
             ObjectInputStream in = new ObjectInputStream(fileIn);
             Object readObject = in.readObject();
             if (readObject instanceof ArrayList<?>) {
@@ -136,14 +136,14 @@ public class Courier extends User {
         setCity(city);
         setZip(zip);
         setCountry(country);
-        Main.couriers = readCouriersFromFile();
-        for (int i = 0; i < Main.couriers.size(); i++) {
-            if (Main.couriers.get(i).getEmail().equals(this.getEmail())) {
-                Main.couriers.set(i, this);
+        com.example.view.Main.couriers = readCouriersFromFile();
+        for (int i = 0; i < com.example.view.Main.couriers.size(); i++) {
+            if (com.example.view.Main.couriers.get(i).getEmail().equals(this.getEmail())) {
+                com.example.view.Main.couriers.set(i, this);
                 break;
             }
         }
-        updateBinaryFile(Main.couriers);
+        updateBinaryFile(com.example.view.Main.couriers);
     }
 
     public void deliverOrder(SellerOrder order) {
@@ -190,11 +190,11 @@ public class Courier extends User {
     }
 
     public static Courier findCourierWithLeastDeliveries() {
-        Main.couriers = Courier.readCouriersFromFile();
+        com.example.view.Main.couriers = Courier.readCouriersFromFile();
         Courier courierWithLeastDeliveries = null;
         int minDeliveries = Integer.MAX_VALUE;
 
-        for (Courier courier : Main.couriers) {
+        for (Courier courier : com.example.view.Main.couriers) {
             int deliveries = courier.getNumberOfOrdersToBeDelivered();
             if (deliveries < minDeliveries) {
                 minDeliveries = deliveries;

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox fx:id="layout" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="10.0" style="-fx-background-color: #f0f0f0;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controller.LoginBuyerSceneController">
+   <children>
+      <Label fx:id="instructionLabel" style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Login as Buyer" />
+      <TextField fx:id="emailField" promptText="Email" />
+      <PasswordField fx:id="passwordField" promptText="Password" />
+      <Button fx:id="loginButton" mnemonicParsing="false" prefWidth="200.0" style="-fx-font-size: 16px; -fx-background-color: #4CAF50; -fx-text-fill: white;" text="Login" onAction="#login" />
+      <Button fx:id="goBackButton" mnemonicParsing="false" prefWidth="200.0" style="-fx-font-size: 16px; -fx-background-color: #2196F3; -fx-text-fill: white;" text="Go Back" onAction="#goBack" />
+      <Label fx:id="messageLabel" />
+   </children>
+</VBox>

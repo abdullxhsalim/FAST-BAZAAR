@@ -1,3 +1,5 @@
+package com.example.model;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,26 +48,26 @@ public class Seller extends User {
         String status = Main.input.nextLine();
         Product product = new Product(name, description, price, quantity, category, this, image, status);
         productList.add(product);
-        Main.sellers = readSellersFromFile();
-        for (int j = 0; j < Main.sellers.size(); j++) {
-            if (Main.sellers.get(j).getEmail().equals(this.getEmail())) {
-                Main.sellers.set(j, this);
+        com.example.view.Main.sellers = readSellersFromFile();
+        for (int j = 0; j < com.example.view.Main.sellers.size(); j++) {
+            if (com.example.view.Main.sellers.get(j).getEmail().equals(this.getEmail())) {
+                com.example.view.Main.sellers.set(j, this);
                 break;
             }
         }
-        updateBinaryFile(Main.sellers);
+        updateBinaryFile(com.example.view.Main.sellers);
     }
 
     public void addProduct(Product product) {
         productList.add(product);
-        Main.sellers = readSellersFromFile();
-        for (int j = 0; j < Main.sellers.size(); j++) {
-            if (Main.sellers.get(j).getEmail().equals(this.getEmail())) {
-                Main.sellers.set(j, this);
+        com.example.view.Main.sellers = readSellersFromFile();
+        for (int j = 0; j < com.example.view.Main.sellers.size(); j++) {
+            if (com.example.view.Main.sellers.get(j).getEmail().equals(this.getEmail())) {
+                com.example.view.Main.sellers.set(j, this);
                 break;
             }
         }
-        updateBinaryFile(Main.sellers);
+        updateBinaryFile(com.example.view.Main.sellers);
     }
 
     public void removeProduct(Product product) {
@@ -154,14 +156,14 @@ public class Seller extends User {
         for (Product currentProduct : productList) {
             if (currentProduct.getId() == id) {
                 productList.remove(currentProduct);
-                Main.sellers = readSellersFromFile();
-                for (int j = 0; j < Main.sellers.size(); j++) {
-                    if (Main.sellers.get(j).getEmail().equals(this.getEmail())) {
-                        Main.sellers.set(j, this);
+                com.example.view.Main.sellers = readSellersFromFile();
+                for (int j = 0; j < com.example.view.Main.sellers.size(); j++) {
+                    if (com.example.view.Main.sellers.get(j).getEmail().equals(this.getEmail())) {
+                        com.example.view.Main.sellers.set(j, this);
                         break;
                     }
                 }
-                updateBinaryFile(Main.sellers);
+                updateBinaryFile(com.example.view.Main.sellers);
                 return;
             }
         }
@@ -200,25 +202,23 @@ public class Seller extends User {
         setCity(city);
         setZip(zip);
         setCountry(country);
-        Main.sellers = readSellersFromFile();
-        for (int i = 0; i < Main.sellers.size(); i++) {
-            if (Main.sellers.get(i).getEmail().equals(this.getEmail())) {
-                Main.sellers.set(i, this);
+        com.example.view.Main.sellers = readSellersFromFile();
+        for (int i = 0; i < com.example.view.Main.sellers.size(); i++) {
+            if (com.example.view.Main.sellers.get(i).getEmail().equals(this.getEmail())) {
+                com.example.view.Main.sellers.set(i, this);
                 break;
             }
         }
-        updateBinaryFile(Main.sellers);
+        updateBinaryFile(com.example.view.Main.sellers);
     }
 
     public static void updateBinaryFile(List<Seller> sellers) {
         try {
-            File directory = new File(
-                    "C:\\Users\\Abdullah\\OneDrive - northsouth.edu\\NSU\\241\\Courses\\CSE215L\\Project\\data\\sellers.ser");
+            File directory = new File("src\\main\\resources\\sellers.ser");
             if (!directory.exists()) {
                 directory.mkdirs();
             }
-            FileOutputStream fileOut = new FileOutputStream(
-                    "C:\\Users\\Abdullah\\OneDrive - northsouth.edu\\NSU\\241\\Courses\\CSE215L\\Project\\data\\sellers.ser");
+            FileOutputStream fileOut = new FileOutputStream("src\\main\\resources\\sellers.ser");
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeObject(sellers);
             out.close();
@@ -232,16 +232,14 @@ public class Seller extends User {
 
     public static ArrayList<Seller> readSellersFromFile() {
         ArrayList<Seller> sellers = new ArrayList<>();
-        File file = new File(
-                "C:\\Users\\Abdullah\\OneDrive - northsouth.edu\\NSU\\241\\Courses\\CSE215L\\Project\\data\\sellers.ser");
+        File file = new File("src\\main\\resources\\sellers.ser");
         try {
             if (!file.exists() || file.length() == 0) {
                 file.createNewFile();
                 System.err.println("Sellers file created");
                 return sellers;
             }
-            FileInputStream fileIn = new FileInputStream(
-                    "C:\\Users\\Abdullah\\OneDrive - northsouth.edu\\NSU\\241\\Courses\\CSE215L\\Project\\data\\sellers.ser");
+            FileInputStream fileIn = new FileInputStream("src\\main\\resources\\sellers.ser");
             ObjectInputStream in = new ObjectInputStream(fileIn);
             Object readObject = in.readObject();
             if (readObject instanceof ArrayList<?>) {
@@ -253,7 +251,7 @@ public class Seller extends User {
             }
             for (Seller seller : sellers) {
                 for (Product product : seller.getProductList()) {
-                    Main.productIds.add(product.getId());
+                    Main.productIDs.add(product.getId());
                 }
                 for(SellerOrder order: seller.getSellerOrders()) {
                     Main.sellerOrderIDs.add(order.getSellerOrderID());

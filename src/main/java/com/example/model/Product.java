@@ -1,3 +1,5 @@
+package com.example.model;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Random;
@@ -6,12 +8,9 @@ public class Product implements Serializable {
     private String name;
     private String description;
     private double price;
-    private int quantity;
-    private String category;
     private Seller seller;
     private String image;
     private String status;
-    private LocalDateTime dateTime;
     private int id;
 
     public Product(String name, String description, double price, int quantity, String category, Seller seller,
@@ -19,18 +18,15 @@ public class Product implements Serializable {
         this.name = name;
         this.description = description;
         this.price = price;
-        this.quantity = quantity;
-        this.category = category;
         this.seller = seller;
         this.image = image;
         this.status = status;
-        this.dateTime = LocalDateTime.now();
         this.id = generateProductId();
     }
 
     public static Product getProductByID(int id) {
-        Main.sellers = Seller.readSellersFromFile();
-        for (Seller seller : Main.sellers) {
+        com.example.view.Main.sellers = Seller.readSellersFromFile();
+        for (Seller seller : com.example.view.Main.sellers) {
             for (Product product : seller.getProductList()) {
                 if (product.getId() == id) {
                     return product;
@@ -44,19 +40,11 @@ public class Product implements Serializable {
     public static int generateProductId() {
         Random random = new Random();
         int newId = random.nextInt(10000);
-        while (Main.productIds.contains(newId)) {
+        while (Main.productIDs.contains(newId)) {
             newId = random.nextInt(10000);
         }
-        Main.productIds.add(newId);
+        Main.productIDs.add(newId);
         return newId;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public LocalDateTime getDateTime() {
-        return dateTime;
     }
 
     public String getDescription() {
@@ -75,10 +63,6 @@ public class Product implements Serializable {
         return price;
     }
 
-    public int getQuantity() {
-        return quantity;
-    }
-
     public Seller getSeller() {
         return seller;
     }
@@ -89,10 +73,6 @@ public class Product implements Serializable {
 
     public String getName() {
         return name;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
     }
 
     public void setDescription(String description) {
@@ -111,20 +91,12 @@ public class Product implements Serializable {
         this.price = price;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
     public void setSeller(Seller seller) {
         this.seller = seller;
     }
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public void setDateTime(LocalDateTime dateTime) {
-        this.dateTime = dateTime;
     }
 
     public void setName(String name) {
@@ -137,13 +109,10 @@ public class Product implements Serializable {
                 "  name: " + name + ",\n" +
                 "  description: " + description + ",\n" +
                 "  price: " + price + ",\n" +
-                "  quantity: " + quantity + ",\n" +
-                "  category: " + category + ",\n" +
                 "  seller: " + seller.getName() + ",\n" +
                 "  image: " + image + ",\n" +
                 "  status: " + status + ",\n" +
-                "  dateTime: " + dateTime + ",\n" +
-                "  id: " + id + "\n" +
+                "  ID: " + id + "\n" +
                 "}";
     }
 }
