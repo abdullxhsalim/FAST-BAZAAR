@@ -36,3 +36,8 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+### Files ###
+**/src/main/resources/sellers.ser
+**/src/main/resources/buyers.ser
+**/src/main/resources/couriers.ser
