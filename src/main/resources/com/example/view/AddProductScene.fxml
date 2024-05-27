@@ -1,32 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
 <!-- AddProductScene.fxml -->
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.HBox?>
+
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.Button?>
-<VBox fx:controller="com.example.controller.AddProductSceneController"
-      xmlns:fx="http://javafx.com/fxml"
-      alignment="center" spacing="10" style="-fx-background-color: #f0f0f0; -fx-padding: 20px;">
-    <HBox spacing="10">
-        <Label text="Name:" style="-fx-font-size: 16px;" />
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.layout.Region?>
+<VBox alignment="center" spacing="10" style="-fx-background-color: #f0f0f0; -fx-padding: 20px;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controller.AddProductSceneController">
+    <Label style="-fx-font-size: 24px; -fx-font-weight: bold;" text="Enter product details:" />
+
+    <HBox alignment="CENTER" spacing="10">
+        <Label style="-fx-font-size: 16px;" text="Name:" />
         <TextField fx:id="nameField" />
     </HBox>
-    <HBox spacing="10">
-        <Label text="Description:" style="-fx-font-size: 16px;" />
+    <HBox alignment="CENTER" spacing="10">
+        <Label style="-fx-font-size: 16px;" text="Description:" />
         <TextField fx:id="descriptionField" />
     </HBox>
-    <HBox spacing="10">
-        <Label text="Price:" style="-fx-font-size: 16px;" />
+    <HBox alignment="CENTER" spacing="10">
+        <Label style="-fx-font-size: 16px;" text="Price:" />
         <TextField fx:id="priceField" />
     </HBox>
-    <HBox spacing="10">
-        <Label text="Image:" style="-fx-font-size: 16px;" />
-        <Button text="Choose Image" onAction="#chooseImage" style="-fx-font-size: 16px; -fx-background-color: #4CAF50; -fx-text-fill: white;" />
-        <TextField fx:id="imageField" editable="false" />
+    <HBox alignment="CENTER" spacing="10">
+        <Label style="-fx-font-size: 16px;" text="Image:" />
+        <Button fx:id="chooseImageButton" onAction="#chooseImage" style="-fx-font-size: 16px; -fx-background-color: #4CAF50; -fx-text-fill: white;" text="Choose Image" />
     </HBox>
+    <Label fx:id="messageLabel" style="-fx-font-size: 16px; -fx-text-fill: green;" />
     <HBox spacing="10">
-        <Label text="Status:" style="-fx-font-size: 16px;" />
-        <TextField fx:id="statusField" />
+        <Button fx:id="goBackButton" onAction="#goBack" style="-fx-background-color: #3F51B5; -fx-text-fill: white;" text="Go Back" />
+        <Region HBox.hgrow="ALWAYS" />
+        <Button fx:id="addProductButton" onAction="#addProduct" style="-fx-background-color: #4CAF50; -fx-text-fill: white;" text="Add Product" />
     </HBox>
-    <Button text="Add Product" onAction="#addProduct" style="-fx-font-size: 16px; -fx-background-color: #2196F3; -fx-text-fill: white;" />
 </VBox>

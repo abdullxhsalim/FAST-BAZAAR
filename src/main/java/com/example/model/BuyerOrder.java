@@ -15,7 +15,6 @@ public class BuyerOrder implements Serializable {
     private String status;
     private int orderID;
     private LocalDateTime orderPlacementTime;
-    private LocalDateTime orderDeliveryTime;
     private double totalCost;
     private String address;
     private String city;
@@ -93,10 +92,6 @@ public class BuyerOrder implements Serializable {
         return orderPlacementTime;
     }
 
-    public LocalDateTime getOrderDeliveryTime() {
-        return orderDeliveryTime;
-    }
-
     public double getTotalCost() {
         return totalCost;
     }
@@ -115,10 +110,6 @@ public class BuyerOrder implements Serializable {
 
     public String getCountry() {
         return country;
-    }
-
-    public void setOrderDeliveryTime(LocalDateTime orderDeliveryTime) {
-        this.orderDeliveryTime = orderDeliveryTime;
     }
 
     public void setStatus(String status) {
@@ -152,7 +143,6 @@ public class BuyerOrder implements Serializable {
                 "  status: " + status + ",\n" +
                 "  id: " + orderID + ",\n" +
                 "  orderPlacementTime: " + orderPlacementTime + ",\n" +
-                "  orderDeliveryTime: " + orderDeliveryTime + ",\n" +
                 "  totalCost: " + totalCost + ",\n" +
                 "  address: " + address + ",\n" +
                 "  city: " + city + ",\n" +

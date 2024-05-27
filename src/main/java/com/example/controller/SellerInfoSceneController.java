@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import com.example.model.Courier;
 import com.example.model.Seller;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
@@ -21,13 +22,13 @@ public class SellerInfoSceneController {
     }
 
     public void setSeller(Seller seller) {
-        nameLabel.setText("Name: " + seller.getName());
-        emailLabel.setText("Email: " + seller.getEmail());
-        phoneLabel.setText("Phone: " + seller.getPhone());
-        addressLabel.setText("Address: " + seller.getAddress());
-        zipLabel.setText("Zip Code: " + seller.getZip());
-        cityLabel.setText("City: " + seller.getCity());
-        countryLabel.setText("Country: " + seller.getCountry());
+        nameLabel.setText(seller.getName());
+        emailLabel.setText(seller.getEmail());
+        phoneLabel.setText(seller.getPhone());
+        addressLabel.setText(seller.getAddress());
+        zipLabel.setText(""+seller.getZip());
+        cityLabel.setText(seller.getCity());
+        countryLabel.setText( seller.getCountry());
     }
 
     private void loadScene(String fxmlFile) {

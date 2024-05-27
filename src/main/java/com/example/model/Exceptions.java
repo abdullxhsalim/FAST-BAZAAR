@@ -47,8 +47,5 @@ public class Exceptions {
     static void phoneValidator(String phone) throws InvalidPhoneException {
         String phoneRegex = "^[0-9]{10}";
         if(!phone.matches(phoneRegex)) throw new InvalidPhoneException(phone);
-        
     }
-
-
 }

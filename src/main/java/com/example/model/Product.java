@@ -9,17 +9,15 @@ public class Product implements Serializable {
     private double price;
     private Seller seller;
     private String image;
-    private String status;
     private int id;
 
-    public Product(String name, String description, double price,  Seller seller,
-            String image, String status) {
+    public Product(String name, String description, double price, Seller seller,
+            String image) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.seller = seller;
         this.image = image;
-        this.status = status;
         this.id = generateProductId();
     }
 
@@ -66,10 +64,6 @@ public class Product implements Serializable {
         return seller;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
     public String getName() {
         return name;
     }
@@ -82,10 +76,6 @@ public class Product implements Serializable {
         this.id = id;
     }
 
-    public void setImage(String image) {
-        this.image = image;
-    }
-
     public void setPrice(double price) {
         this.price = price;
     }
@@ -94,24 +84,29 @@ public class Product implements Serializable {
         this.seller = seller;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     public void setName(String name) {
         this.name = name;
     }
 
+    public void setImagePath(String path) {
+        this.image = path;
+    }
+
+    public String getImagePath() {
+        return image;
+    }
+
     @Override
     public String toString() {
-        return "Product {\n" +
-                "  name: " + name + ",\n" +
-                "  description: " + description + ",\n" +
-                "  price: " + price + ",\n" +
-                "  seller: " + seller.getName() + ",\n" +
-                "  image: " + image + ",\n" +
-                "  status: " + status + ",\n" +
-                "  ID: " + id + "\n" +
-                "}";
+        return String.format(
+                "Product Details:\n" +
+                        "-----------------\n" +
+                        "Name: %s\n" +
+                        "Description: %s\n" +
+                        "Price: %.2f\n" +
+                        "Seller: %s\n" +
+                        "Image: %s\n" +
+                        "Product ID: %s\n",
+                name, description, price, seller.getName(), image, id);
     }
 }

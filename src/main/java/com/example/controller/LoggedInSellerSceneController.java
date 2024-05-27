@@ -23,7 +23,7 @@ public class LoggedInSellerSceneController {
     private Button addProductButton;
 
     @FXML
-    private Button viewAndUpdateProductsButton;
+    private Button updateProductsButton;
 
     @FXML
     private Button removeProductsButton;
@@ -57,7 +57,7 @@ public class LoggedInSellerSceneController {
         AddProductSceneController controller = loader.getController();
         controller.setSeller(seller);
 
-        Stage stage = (Stage) profileButton.getScene().getWindow();
+        Stage stage = (Stage) addProductButton.getScene().getWindow();
         sceneObj = stage.getScene();
         currentSeller = seller;
         stage.setScene(new Scene(root));
@@ -66,14 +66,26 @@ public class LoggedInSellerSceneController {
     }
 
     @FXML
-    private void viewAndUpdateProducts() {
-        // Code to view and update products
+    private void updateProducts() {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/view/UpdateProductsScene.fxml"));
+        Parent root = null;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    
+        UpdateProductsSceneController controller = loader.getController();
+        controller.setSeller(seller);
+    
+        Stage stage = (Stage) updateProductsButton.getScene().getWindow();
+        sceneObj = stage.getScene();
+        currentSeller = seller;
+        stage.setScene(new Scene(root));
+        stage.setMinHeight(400);
+        stage.setMinWidth(600);
     }
 
-    @FXML
-    private void removeProducts() {
-        // Code to remove products
-    }
     @FXML
     private void profile() {
         try {
@@ -96,11 +108,19 @@ public class LoggedInSellerSceneController {
 
     @FXML
     private void goBack() {
-        // Code to go back
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/com/example/view/LoginSellerScene.fxml"));
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) goBackButton.getScene().getWindow();
+            stage.setScene(scene);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
-
+    
     @FXML
     private void exit() {
-        // Code to exit the program
+        Stage stage = (Stage) exitButton.getScene().getWindow();
+        stage.close();
     }
 }

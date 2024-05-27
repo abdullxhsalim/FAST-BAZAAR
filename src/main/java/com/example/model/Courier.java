@@ -1,6 +1,9 @@
 package com.example.model;
 
 import java.util.*;
+
+import com.almasb.fxgl.core.collection.Array;
+
 import java.io.*;
 
 public class Courier extends User {
@@ -219,5 +222,25 @@ public class Courier extends User {
                 ", orderToDeliver=" + orders +
                 ", numberOfOrdersToBeDelivered=" + numberOfOrdersToBeDelivered +
                 '}';
+    }
+
+    public ArrayList<SellerOrder> getPendingOrders() {
+        ArrayList<SellerOrder> pendingOrders = new ArrayList<>();
+        for (SellerOrder order : orders) {
+            if (!order.getStatus().equals("Delivered")) {
+                pendingOrders.add(order);
+            }
+        }
+        return pendingOrders;
+    }
+
+    public void updateSellerOrderStatus(SellerOrder order) {
+        for (SellerOrder sellerOrder : orders) {
+            if (sellerOrder.equals(order)) {
+                sellerOrder.setStatus("Delivered");
+                break;
+            }
+        }
+        updateBinaryFile(com.example.view.Main.couriers);
     }
 }

@@ -21,18 +21,16 @@ public class LoggedInBuyerSceneController {
     @FXML
     private Button browseProductsButton;
     @FXML
-    private Button searchProductButton;
-    @FXML
     private Button profileButton;
     @FXML
     private Button goBackButton;
     @FXML
     private Button exitButton;
+    @FXML
+    private Button viewOrdersButton;
 
     public static Scene sceneObj;
     public static Buyer currentBuyer;
-
-
 
     public void setBuyer(Buyer buyer) {
         this.buyer = buyer;
@@ -57,12 +55,18 @@ public class LoggedInBuyerSceneController {
 
     @FXML
     private void browseProducts() {
-        Buyer.browseAllProducts();
-    }
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/view/BrowseProductsScene.fxml"));
+            Parent root = loader.load();
 
-    @FXML
-    private void searchProduct() {
-        Buyer.searchProduct();
+            BrowseProductsSceneController controller = loader.getController();
+            controller.setBuyer(buyer);
+
+            Stage stage = (Stage) browseProductsButton.getScene().getWindow();
+            stage.setScene(new Scene(root));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -73,7 +77,7 @@ public class LoggedInBuyerSceneController {
 
             ViewProfileBuyerSceneController controller = loader.getController();
             controller.setBuyer(buyer);
-            
+
             Stage stage = (Stage) profileButton.getScene().getWindow();
             sceneObj = stage.getScene();
             currentBuyer = buyer;
@@ -87,11 +91,36 @@ public class LoggedInBuyerSceneController {
 
     @FXML
     private void goBack() {
-
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/view/LoginScene.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) goBackButton.getScene().getWindow();
+            stage.setScene(new Scene(root));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
     private void exit() {
+        Stage stage = (Stage) exitButton.getScene().getWindow();
+        stage.close();
+    }
+
+    @FXML
+    private void viewOrders() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/view/ViewOrdersBuyerScene.fxml"));
+            Parent root = loader.load();
+
+            ViewOrdersBuyerSceneController controller = loader.getController();
+            controller.setBuyer(buyer);
+
+            Stage stage = (Stage) viewOrdersButton.getScene().getWindow();
+            stage.setScene(new Scene(root));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 }

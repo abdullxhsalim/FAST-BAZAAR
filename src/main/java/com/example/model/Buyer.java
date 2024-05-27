@@ -69,6 +69,16 @@ public class Buyer extends User {
         Cart.clear();
         addOrder(order);
     }
+    
+    public static ArrayList<Product> getSearchedProducts(String key) {
+        ArrayList<Product> searchedProducts = new ArrayList<>();
+        for (Product product : getAllProducts()) {
+            if (product.getName().toLowerCase().contains(key.toLowerCase())) {
+                searchedProducts.add(product);
+            }
+        }
+        return searchedProducts;
+    }
 
     public void addToCart() {
         com.example.view.Main.buyers = readBuyersFromFile();
@@ -85,7 +95,6 @@ public class Buyer extends User {
             }
         }
     }
-
     public void addToCart(Product product) {
         Cart.add(product);
         ArrayList<Buyer> buyers = readBuyersFromFile();
@@ -98,11 +107,27 @@ public class Buyer extends User {
         updateBinaryFile(buyers);
     }
 
+    public void setCart(ArrayList<Product> cart) {
+        this.Cart = cart;
+    }
+
     public void removeFromCart(Product product) {
         this.Cart.remove(product);
         com.example.view.Main.buyers = readBuyersFromFile();
         for (int i = 0; i < com.example.view.Main.buyers.size(); i++) {
-            if (com.example.view.Main.buyers.get(i).getEmail().equals(this.getEmail())) {
+            if (com.example.view.Main.buyers.get(i).getEmail().equalsIgnoreCase(this.getEmail())) {
+                com.example.view.Main.buyers.set(i, this);
+                break;
+            }
+        }
+        updateBinaryFile(com.example.view.Main.buyers);
+    }
+
+    public void emptyCart() {
+        this.Cart.clear();
+        com.example.view.Main.buyers = readBuyersFromFile();
+        for (int i = 0; i < com.example.view.Main.buyers.size(); i++) {
+            if (com.example.view.Main.buyers.get(i).getEmail().equalsIgnoreCase(this.getEmail())) {
                 com.example.view.Main.buyers.set(i, this);
                 break;
             }
@@ -216,6 +241,17 @@ public class Buyer extends User {
         for (Seller seller : com.example.view.Main.sellers) {
             seller.viewProducts();
         }
+    }
+
+    public static ArrayList<Product> getAllProducts() {
+        com.example.view.Main.sellers = Seller.readSellersFromFile();
+        ArrayList<Product> products = new ArrayList<>();
+        for (Seller seller : com.example.view.Main.sellers) {
+            for (Product product : seller.getProductList()) {
+                products.add(product);
+            }
+        }
+        return products;
     }
 
     public static void searchProduct() {

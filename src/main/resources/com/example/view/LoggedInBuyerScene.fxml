@@ -9,17 +9,17 @@
    <children>
       <Label fx:id="instructionLabel" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
              
-      <Button fx:id="cartButton" mnemonicParsing="false" prefWidth="200.0" style="-fx-font-size: 16px; -fx-background-color: #4CAF50; -fx-text-fill: white;" text="Cart" onAction="#cart" />
+      <Button fx:id="cartButton" mnemonicParsing="false" prefWidth="200.0" style="-fx-font-size: 16px; -fx-background-color: #8d00ff; -fx-text-fill: white;" text="Cart" onAction="#cart" />
               
-      <Button fx:id="browseProductsButton" mnemonicParsing="false" prefWidth="200.0" style="-fx-font-size: 16px; -fx-background-color: #FF9800; -fx-text-fill: white;" text="Browse Products" onAction="#browseProducts" />
-              
-      <Button fx:id="searchProductButton" mnemonicParsing="false" prefWidth="200.0" style="-fx-font-size: 16px; -fx-background-color: #9C27B0; -fx-text-fill: white;" text="Search Product" onAction="#searchProduct" />
+      <Button fx:id="browseProductsButton" mnemonicParsing="false" prefWidth="200.0" style="-fx-font-size: 16px; -fx-background-color: #676000; -fx-text-fill: white;" text="Browse Products" onAction="#browseProducts" />
+
+      <Button fx:id="viewOrdersButton" mnemonicParsing="false" prefWidth="200.0" style="-fx-font-size: 16px; -fx-background-color: #00ffe4; -fx-text-fill: white;" text="View Orders" onAction="#viewOrders" />
+
+      <Button fx:id="profileButton" mnemonicParsing="false" prefWidth="200.0" style="-fx-font-size: 16px; -fx-background-color: #59af4c; -fx-text-fill: white;" text="Profile" onAction="#profile" />
       
-      <Button fx:id="profileButton" mnemonicParsing="false" prefWidth="200.0" style="-fx-font-size: 16px; -fx-background-color: #4CAF50; -fx-text-fill: white;" text="Profile" onAction="#profile" />
+      <Button fx:id="goBackButton" mnemonicParsing="false" prefWidth="200.0" style="-fx-font-size: 16px; -fx-background-color: #fc0000; -fx-text-fill: white;" text="Go Back" onAction="#goBack" />
       
-      <Button fx:id="goBackButton" mnemonicParsing="false" prefWidth="200.0" style="-fx-font-size: 16px; -fx-background-color: #9C27B0; -fx-text-fill: white;" text="Go Back" onAction="#goBack" />
-      
-      <Button fx:id="exitButton" mnemonicParsing="false" prefWidth="200.0" style="-fx-font-size: 16px; -fx-background-color: #4CAF50; -fx-text-fill: white;" text="Exit" onAction="#exit" />
+      <Button fx:id="exitButton" mnemonicParsing="false" prefWidth="200.0" style="-fx-font-size: 16px; -fx-background-color: #000000; -fx-text-fill: white;" text="Exit" onAction="#exit" />
    </children>
    
 </VBox>

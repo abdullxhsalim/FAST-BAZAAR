@@ -41,7 +41,7 @@ public class Seller extends User {
         String image = Main.input.nextLine();
         System.out.println("Enter status: ");
         String status = Main.input.nextLine();
-        Product product = new Product(name, description, price, this, image, status);
+        Product product = new Product(name, description, price, this, image);
         productList.add(product);
         com.example.view.Main.sellers = readSellersFromFile();
         for (int j = 0; j < com.example.view.Main.sellers.size(); j++) {
@@ -100,7 +100,7 @@ public class Seller extends User {
                 String image = Main.input.nextLine();
                 System.out.println("Enter new status: ");
                 String status = Main.input.nextLine();
-                Product updatedProduct = new Product(name, description, price, this, image, status);
+                Product updatedProduct = new Product(name, description, price, this, image);
                 productList.set(productList.indexOf(currentProduct), updatedProduct);
                 ArrayList<Seller> sellers = readSellersFromFile();
                 for (int j = 0; j < sellers.size(); j++) {
@@ -137,6 +137,15 @@ public class Seller extends User {
 
     public void viewSales() {
         // View sales
+    }
+
+
+    public ArrayList<Product> getProducts() {
+        return productList;
+    }
+
+    public void setProducts(ArrayList<Product> products) {
+        this.productList = products;
     }
 
     public void viewOrders() {
@@ -265,8 +274,6 @@ public class Seller extends User {
         }
         return sellers == null ? new ArrayList<>() : sellers;
     }
-
-
 
     @Override
     public String toString() {

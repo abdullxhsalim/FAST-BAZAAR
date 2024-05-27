@@ -11,13 +11,11 @@
 
         <Button fx:id="addProductButton" mnemonicParsing="false" onAction="#addProduct" prefWidth="200.0" style="-fx-font-size: 16px; -fx-background-color: #4CAF50; -fx-text-fill: white;" text="Add product" />
 
-        <Button fx:id="viewAndUpdateProductsButton" mnemonicParsing="false" onAction="#viewAndUpdateProducts" prefWidth="200.0" style="-fx-font-size: 16px; -fx-background-color: #FF9800; -fx-text-fill: white;" text="Update Products" />
-
-        <Button fx:id="removeProductsButton" mnemonicParsing="false" onAction="#removeProducts" prefWidth="200.0" style="-fx-font-size: 16px; -fx-background-color: #9C27B0; -fx-text-fill: white;" text="Remove Products" />
+        <Button fx:id="updateProductsButton" mnemonicParsing="false" onAction="#updateProducts" prefWidth="200.0" style="-fx-font-size: 16px; -fx-background-color: #FF9800; -fx-text-fill: white;" text="Update Products" />
 
         <Button fx:id="profileButton" mnemonicParsing="false" onAction="#profile" prefWidth="200.0" style="-fx-font-size: 16px; -fx-background-color: #4CAF50; -fx-text-fill: white;" text="Profile" />
 
-        <Button fx:id="goBackButton" mnemonicParsing="false" onAction="#goBack" prefWidth="200.0" style="-fx-font-size: 16px; -fx-background-color: #9C27B0; -fx-text-fill: white;" text="Go Back" />
+        <Button fx:id="goBackButton" mnemonicParsing="false" onAction="#goBack" prefWidth="200.0" style="-fx-font-size: 16px; -fx-background-color: #9C27B0; -fx-text-fill: white;" text="Log out" />
 
         <Button fx:id="exitButton" mnemonicParsing="false" onAction="#exit" prefWidth="200.0" style="-fx-font-size: 16px; -fx-background-color: #4CAF50; -fx-text-fill: white;" text="Exit" />
     </children>
