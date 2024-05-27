@@ -29,6 +29,11 @@ public class LoggedInBuyerSceneController {
     @FXML
     private Button exitButton;
 
+    public static Scene sceneObj;
+    public static Buyer currentBuyer;
+
+
+
     public void setBuyer(Buyer buyer) {
         this.buyer = buyer;
         instructionLabel.setText("Welcome, " + buyer.getName() + "!");
@@ -70,6 +75,8 @@ public class LoggedInBuyerSceneController {
             controller.setBuyer(buyer);
             
             Stage stage = (Stage) profileButton.getScene().getWindow();
+            sceneObj = stage.getScene();
+            currentBuyer = buyer;
             stage.setScene(new Scene(root));
             stage.setMinHeight(400);
             stage.setMinWidth(600);

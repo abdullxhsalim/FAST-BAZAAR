@@ -37,16 +37,11 @@ public class Seller extends User {
         System.out.println("Enter price: ");
         double price = Main.input.nextDouble();
         Main.input.nextLine();
-        System.out.println("Enter quantity: ");
-        int quantity = Main.input.nextInt();
-        Main.input.nextLine();
-        System.out.println("Enter category: ");
-        String category = Main.input.nextLine();
         System.out.println("Enter image: ");
         String image = Main.input.nextLine();
         System.out.println("Enter status: ");
         String status = Main.input.nextLine();
-        Product product = new Product(name, description, price, quantity, category, this, image, status);
+        Product product = new Product(name, description, price, this, image, status);
         productList.add(product);
         com.example.view.Main.sellers = readSellersFromFile();
         for (int j = 0; j < com.example.view.Main.sellers.size(); j++) {
@@ -105,7 +100,7 @@ public class Seller extends User {
                 String image = Main.input.nextLine();
                 System.out.println("Enter new status: ");
                 String status = Main.input.nextLine();
-                Product updatedProduct = new Product(name, description, price, quantity, category, this, image, status);
+                Product updatedProduct = new Product(name, description, price, this, image, status);
                 productList.set(productList.indexOf(currentProduct), updatedProduct);
                 ArrayList<Seller> sellers = readSellersFromFile();
                 for (int j = 0; j < sellers.size(); j++) {

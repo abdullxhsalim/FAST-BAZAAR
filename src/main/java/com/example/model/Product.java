@@ -1,7 +1,6 @@
 package com.example.model;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.Random;
 
 public class Product implements Serializable {
@@ -13,7 +12,7 @@ public class Product implements Serializable {
     private String status;
     private int id;
 
-    public Product(String name, String description, double price, int quantity, String category, Seller seller,
+    public Product(String name, String description, double price,  Seller seller,
             String image, String status) {
         this.name = name;
         this.description = description;

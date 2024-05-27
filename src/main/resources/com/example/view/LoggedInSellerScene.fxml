@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="$CONTROLLER_NAME$"
-            prefHeight="400.0" prefWidth="600.0" >
+<VBox fx:id="layout" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="10.0" style="-fx-background-color: #f0f0f0;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controller.LoggedInSellerSceneController">
 
-</AnchorPane>
+    <children>
+        <Label fx:id="instructionLabel" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
+
+        <Button fx:id="addProductButton" mnemonicParsing="false" onAction="#addProduct" prefWidth="200.0" style="-fx-font-size: 16px; -fx-background-color: #4CAF50; -fx-text-fill: white;" text="Add product" />
+
+        <Button fx:id="viewAndUpdateProductsButton" mnemonicParsing="false" onAction="#viewAndUpdateProducts" prefWidth="200.0" style="-fx-font-size: 16px; -fx-background-color: #FF9800; -fx-text-fill: white;" text="Update Products" />
+
+        <Button fx:id="removeProductsButton" mnemonicParsing="false" onAction="#removeProducts" prefWidth="200.0" style="-fx-font-size: 16px; -fx-background-color: #9C27B0; -fx-text-fill: white;" text="Remove Products" />
+
+        <Button fx:id="profileButton" mnemonicParsing="false" onAction="#profile" prefWidth="200.0" style="-fx-font-size: 16px; -fx-background-color: #4CAF50; -fx-text-fill: white;" text="Profile" />
+
+        <Button fx:id="goBackButton" mnemonicParsing="false" onAction="#goBack" prefWidth="200.0" style="-fx-font-size: 16px; -fx-background-color: #9C27B0; -fx-text-fill: white;" text="Go Back" />
+
+        <Button fx:id="exitButton" mnemonicParsing="false" onAction="#exit" prefWidth="200.0" style="-fx-font-size: 16px; -fx-background-color: #4CAF50; -fx-text-fill: white;" text="Exit" />
+    </children>
+
+</VBox>

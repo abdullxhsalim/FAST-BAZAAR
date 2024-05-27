@@ -1,14 +1,32 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="$CONTROLLER_NAME$"
-            prefHeight="400.0" prefWidth="600.0" >
-
-</AnchorPane>
+<!-- AddProductScene.fxml -->
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
+<VBox fx:controller="com.example.controller.AddProductSceneController"
+      xmlns:fx="http://javafx.com/fxml"
+      alignment="center" spacing="10" style="-fx-background-color: #f0f0f0; -fx-padding: 20px;">
+    <HBox spacing="10">
+        <Label text="Name:" style="-fx-font-size: 16px;" />
+        <TextField fx:id="nameField" />
+    </HBox>
+    <HBox spacing="10">
+        <Label text="Description:" style="-fx-font-size: 16px;" />
+        <TextField fx:id="descriptionField" />
+    </HBox>
+    <HBox spacing="10">
+        <Label text="Price:" style="-fx-font-size: 16px;" />
+        <TextField fx:id="priceField" />
+    </HBox>
+    <HBox spacing="10">
+        <Label text="Image:" style="-fx-font-size: 16px;" />
+        <Button text="Choose Image" onAction="#chooseImage" style="-fx-font-size: 16px; -fx-background-color: #4CAF50; -fx-text-fill: white;" />
+        <TextField fx:id="imageField" editable="false" />
+    </HBox>
+    <HBox spacing="10">
+        <Label text="Status:" style="-fx-font-size: 16px;" />
+        <TextField fx:id="statusField" />
+    </HBox>
+    <Button text="Add Product" onAction="#addProduct" style="-fx-font-size: 16px; -fx-background-color: #2196F3; -fx-text-fill: white;" />
+</VBox>

@@ -4,9 +4,16 @@ import com.example.model.Buyer;
 import com.example.view.Main;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class ViewProfileBuyerSceneController {
     private Buyer buyer;
@@ -14,6 +21,8 @@ public class ViewProfileBuyerSceneController {
     private TextField nameField;
     @FXML
     private TextField emailField;
+    @FXML
+    private PasswordField passwordField;
     @FXML
     private TextField phoneField;
     @FXML
@@ -24,6 +33,8 @@ public class ViewProfileBuyerSceneController {
     private TextField zipField;
     @FXML
     private TextField countryField;
+    @FXML
+    private Button goBackButton;
     @FXML
     private Button editButton;
     @FXML
@@ -38,6 +49,7 @@ public class ViewProfileBuyerSceneController {
         nameField.setText(buyer.getName());
         emailField.setText(buyer.getEmail());
         phoneField.setText(buyer.getPhone());
+        passwordField.setText(buyer.getPassword());
         addressField.setText(buyer.getAddress());
         cityField.setText(buyer.getCity());
         zipField.setText(String.valueOf(buyer.getZip()));
@@ -66,5 +78,16 @@ public class ViewProfileBuyerSceneController {
         }
         Buyer.updateBinaryFile(Main.buyers);
         messageLabel.setText("Profile updated successfully!");
+    }
+
+    @FXML
+    private void goBack() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/view/LoggedInBuyerScene.fxml"));
+        Parent root = loader.load();
+        LoggedInBuyerSceneController controller = loader.getController();
+        controller.setBuyer(this.buyer);
+        Stage stage = (Stage) goBackButton.getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
     }
 }
