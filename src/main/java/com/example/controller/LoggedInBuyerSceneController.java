@@ -68,9 +68,11 @@ public class LoggedInBuyerSceneController {
 
             ViewProfileBuyerSceneController controller = loader.getController();
             controller.setBuyer(buyer);
-
+            
             Stage stage = (Stage) profileButton.getScene().getWindow();
             stage.setScene(new Scene(root));
+            stage.setMinHeight(400);
+            stage.setMinWidth(600);
         } catch (IOException e) {
             e.printStackTrace();
         }
