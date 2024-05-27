@@ -1,3 +1,4 @@
+package com.example.model;
 public class Exceptions {
     
     public static class InvalidEmailException extends Exception {
