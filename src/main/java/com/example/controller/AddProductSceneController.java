@@ -54,8 +54,8 @@ public class AddProductSceneController {
         }
         Seller.updateBinaryFile(Main.sellers);
         messageLabel.setText("Product added successfully!");
-        addProductButton.setText("Go Back");
-        addProductButton.setOnAction(e -> goBack());
+        addProductButton.setDisable(true);
+        addProductButton.setVisible(false);
     }
 
     @FXML
