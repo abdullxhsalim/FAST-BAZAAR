@@ -11,6 +11,8 @@
 
         <Button fx:id="updateOrdersButton" mnemonicParsing="false" prefWidth="200.0" style="-fx-font-size: 16px; -fx-background-color: #8d00ff; -fx-text-fill: white;" text="Update orders" onAction="#updateOrders" />
 
+        <Button fx:id="viewCompletedOrdersButton" mnemonicParsing="false" prefWidth="200.0" style="-fx-font-size: 16px; -fx-background-color: #00ffd8; -fx-text-fill: white;" text="View completed orders" onAction="#viewCompletedOrders" />
+
         <Button fx:id="profileButton" mnemonicParsing="false" prefWidth="200.0" style="-fx-font-size: 16px; -fx-background-color: #59af4c; -fx-text-fill: white;" text="Profile" onAction="#profile" />
 
         <Button fx:id="goBackButton" mnemonicParsing="false" prefWidth="200.0" style="-fx-font-size: 16px; -fx-background-color: #fc0000; -fx-text-fill: white;" text="Go Back" onAction="#goBack" />

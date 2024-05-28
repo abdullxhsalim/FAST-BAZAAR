@@ -3,14 +3,20 @@ package com.example.controller;
 import com.example.model.Seller;
 import com.example.model.SellerOrder;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.text.Text;
-import javafx.geometry.Pos;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.stage.Stage;
+import javafx.scene.control.Button;
 
-public class ViewCompletedOrdersSellerScene {
+import java.io.IOException;
+
+public class ViewCompletedOrdersSellerSceneController {
     private Seller seller;
 
     @FXML
@@ -36,6 +42,21 @@ public class ViewCompletedOrdersSellerScene {
                     setGraphic(text);
                 }
             }
+        });
+
+        goBackButton.setOnAction(e -> {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/view/LoggedInSellerScene.fxml"));
+            Parent root = null;
+            try {
+                root = loader.load();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+            LoggedInSellerSceneController controller = loader.getController();
+            controller.setSeller(this.seller);
+            Stage stage = (Stage) goBackButton.getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
         });
     }
 }

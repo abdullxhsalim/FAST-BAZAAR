@@ -9,15 +9,19 @@
     <children>
         <Label fx:id="instructionLabel" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
 
-        <Button fx:id="addProductButton" mnemonicParsing="false" onAction="#addProduct" prefWidth="200.0" style="-fx-font-size: 16px; -fx-background-color: #4CAF50; -fx-text-fill: white;" text="Add product" />
+        <Button fx:id="addProductButton" mnemonicParsing="false" onAction="#addProduct" prefWidth="200.0" style="-fx-font-size: 16px; -fx-background-color: #3b006b; -fx-text-fill: white;" text="Add product" />
 
-        <Button fx:id="updateProductsButton" mnemonicParsing="false" onAction="#updateProducts" prefWidth="200.0" style="-fx-font-size: 16px; -fx-background-color: #FF9800; -fx-text-fill: white;" text="Update Products" />
+        <Button fx:id="updateProductsButton" mnemonicParsing="false" onAction="#updateProducts" prefWidth="200.0" style="-fx-font-size: 16px; -fx-background-color: #ff00f4; -fx-text-fill: white;" text="Update Products" />
 
-        <Button fx:id="profileButton" mnemonicParsing="false" onAction="#profile" prefWidth="200.0" style="-fx-font-size: 16px; -fx-background-color: #4CAF50; -fx-text-fill: white;" text="Profile" />
+        <Button fx:id = "viewPendingOrdersButton" mnemonicParsing="false" onAction="#viewPendingOrders" prefWidth="200.0" style="-fx-font-size: 16px; -fx-background-color: #0039ff; -fx-text-fill: white;" text="View Pending Orders" />
 
-        <Button fx:id="goBackButton" mnemonicParsing="false" onAction="#goBack" prefWidth="200.0" style="-fx-font-size: 16px; -fx-background-color: #9C27B0; -fx-text-fill: white;" text="Log out" />
+        <Button fx:id="viewCompletedOrdersButton" mnemonicParsing="false" onAction="#viewCompletedOrders" prefWidth="200.0" style="-fx-font-size: 16px; -fx-background-color: #4CAF50; -fx-text-fill: white;" text="View Completed Orders" />
 
-        <Button fx:id="exitButton" mnemonicParsing="false" onAction="#exit" prefWidth="200.0" style="-fx-font-size: 16px; -fx-background-color: #4CAF50; -fx-text-fill: white;" text="Exit" />
+        <Button fx:id="profileButton" mnemonicParsing="false" onAction="#profile" prefWidth="200.0" style="-fx-font-size: 16px; -fx-background-color: #af9b4c; -fx-text-fill: white;" text="Profile" />
+
+        <Button fx:id="goBackButton" mnemonicParsing="false" onAction="#goBack" prefWidth="200.0" style="-fx-font-size: 16px; -fx-background-color: #ff0000; -fx-text-fill: white;" text="Log out" />
+
+        <Button fx:id="exitButton" mnemonicParsing="false" onAction="#exit" prefWidth="200.0" style="-fx-font-size: 16px; -fx-background-color: #000000; -fx-text-fill: white;" text="Exit" />
     </children>
 
 </VBox>

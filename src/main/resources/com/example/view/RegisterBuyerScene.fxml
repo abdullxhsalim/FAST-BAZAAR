@@ -21,6 +21,8 @@
       <TextField fx:id="zipField" maxWidth="300.0" promptText="Enter your zip code" />
       <TextField fx:id="cityField" maxWidth="300.0" promptText="Enter your city" />
       <TextField fx:id="countryField" maxWidth="300.0" promptText="Enter your country" />
-      <Button fx:id="registerButton" maxWidth="300.0" mnemonicParsing="false" style="-fx-font-size: 16px; -fx-background-color: #4CAF50; -fx-text-fill: white;" text="Register" />      <Label fx:id="messageLabel" style="-fx-font-size: 16px;" />
+      <Button fx:id="registerButton" maxWidth="300.0" mnemonicParsing="false" style="-fx-font-size: 16px; -fx-background-color: #4CAF50; -fx-text-fill: white;" text="Register" />
+      <Button fx:id="goBackButton" mnemonicParsing="false" prefWidth="200.0" style="-fx-font-size: 16px; -fx-background-color: #ff0000; -fx-text-fill: white;" text="Go Back" />
+      <Label fx:id="messageLabel" style="-fx-font-size: 16px;" />
    </children>
 </VBox>

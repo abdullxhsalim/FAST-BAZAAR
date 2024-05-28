@@ -1,5 +1,7 @@
 package com.example.model;
 
+import com.example.exceptions.Exceptions;
+
 import java.util.*;
 
 public class Main {

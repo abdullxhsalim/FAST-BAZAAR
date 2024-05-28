@@ -134,6 +134,30 @@ public class Seller extends User {
         }
         System.out.println("Product with id " + id + " not found.");
     }
+    
+    public ArrayList<SellerOrder> getCompletedOrders() {
+        ArrayList<SellerOrder> completedOrders = new ArrayList<>();
+        for (SellerOrder order : sellerOrders) {
+            if (order.getStatus().equals("Delivered")) {
+                completedOrders.add(order);
+            }
+        }
+        return completedOrders;       
+    }
+
+    public ArrayList<SellerOrder> getPendingOrders() {
+        ArrayList<SellerOrder> pendingOrders = new ArrayList<>();
+        for (SellerOrder order : sellerOrders) {
+            if (!order.getStatus().equals("Delivered")) {
+                pendingOrders.add(order);
+            }
+        }
+        return pendingOrders;       
+    }
+
+    public ArrayList<SellerOrder> getOrders() {
+        return sellerOrders;
+    }
 
     public void viewSales() {
         // View sales

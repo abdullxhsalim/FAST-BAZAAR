@@ -92,7 +92,7 @@ public class LoggedInBuyerSceneController {
     @FXML
     private void goBack() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/view/LoginScene.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/view/LoginBuyerScene.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) goBackButton.getScene().getWindow();
             stage.setScene(new Scene(root));

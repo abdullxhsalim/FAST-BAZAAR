@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import com.example.exceptions.Exceptions;
 import com.example.model.Buyer;
 import com.example.view.Main;
 
@@ -58,26 +59,45 @@ public class ViewProfileBuyerSceneController {
 
     @FXML
     private void editBuyerInfo() {
-        buyer.setName(nameField.getText());
-        buyer.setEmail(emailField.getText());
-        buyer.setPhone(phoneField.getText());
-        buyer.setAddress(addressField.getText());
-        buyer.setCity(cityField.getText());
-        buyer.setZip(Integer.parseInt(zipField.getText()));
-        buyer.setCountry(countryField.getText());
-        for (Buyer b : Main.buyers) {
-            if (b.equals(buyer)) {
-                b.setName(buyer.getName());
-                b.setEmail(buyer.getEmail());
-                b.setPhone(buyer.getPhone());
-                b.setAddress(buyer.getAddress());
-                b.setCity(buyer.getCity());
-                b.setZip(buyer.getZip());
-                b.setCountry(buyer.getCountry());
+        try {
+            Exceptions.emailValidator(emailField.getText());
+            Exceptions.nameValidator(nameField.getText());
+            Exceptions.phoneValidator(phoneField.getText());
+            Exceptions.zipValidator(zipField.getText());
+
+            buyer.setName(nameField.getText());
+            buyer.setEmail(emailField.getText());
+            buyer.setPhone(phoneField.getText());
+            buyer.setAddress(addressField.getText());
+            buyer.setCity(cityField.getText());
+            buyer.setZip(Integer.parseInt(zipField.getText()));
+            buyer.setCountry(countryField.getText());
+            for (Buyer b : Main.buyers) {
+                if (b.equals(buyer)) {
+                    b.setName(buyer.getName());
+                    b.setEmail(buyer.getEmail());
+                    b.setPhone(buyer.getPhone());
+                    b.setAddress(buyer.getAddress());
+                    b.setCity(buyer.getCity());
+                    b.setZip(buyer.getZip());
+                    b.setCountry(buyer.getCountry());
+                }
             }
+            Buyer.updateBinaryFile(Main.buyers);
+            messageLabel.setText("Profile updated successfully!");
+        } catch (Exceptions.InvalidEmailException e) {
+            emailField.setStyle("-fx-text-fill: red;");
+            messageLabel.setText(e.toString());
+        } catch (Exceptions.InvalidNameException e) {
+            nameField.setStyle("-fx-text-fill: red;");
+            messageLabel.setText(e.toString());
+        } catch (Exceptions.InvalidPhoneException e) {
+            phoneField.setStyle("-fx-text-fill: red;");
+            messageLabel.setText(e.toString());
+        } catch (Exceptions.InvalidZipException e) {
+            zipField.setStyle("-fx-text-fill: red;");
+            messageLabel.setText(e.toString());
         }
-        Buyer.updateBinaryFile(Main.buyers);
-        messageLabel.setText("Profile updated successfully!");
     }
 
     @FXML

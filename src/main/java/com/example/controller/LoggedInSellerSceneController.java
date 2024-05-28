@@ -26,7 +26,10 @@ public class LoggedInSellerSceneController {
     private Button updateProductsButton;
 
     @FXML
-    private Button removeProductsButton;
+    private Button viewPendingOrdersButton;
+
+    @FXML
+    private Button viewCompletedOrdersButton;
 
     @FXML
     private Button profileButton;
@@ -79,6 +82,48 @@ public class LoggedInSellerSceneController {
         controller.setSeller(seller);
     
         Stage stage = (Stage) updateProductsButton.getScene().getWindow();
+        sceneObj = stage.getScene();
+        currentSeller = seller;
+        stage.setScene(new Scene(root));
+        stage.setMinHeight(400);
+        stage.setMinWidth(600);
+    }
+
+    @FXML
+    private void viewPendingOrders() {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/view/ViewPendingOrdersSellerScene.fxml"));
+        Parent root = null;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        ViewPendingOrdersSellerSceneController controller = loader.getController();
+        controller.setSeller(seller);
+
+        Stage stage = (Stage) viewPendingOrdersButton.getScene().getWindow();
+        sceneObj = stage.getScene();
+        currentSeller = seller;
+        stage.setScene(new Scene(root));
+        stage.setMinHeight(400);
+        stage.setMinWidth(600);
+    }
+
+    @FXML
+    private void viewCompletedOrders() {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/view/ViewCompletedOrdersSellerScene.fxml"));
+        Parent root = null;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        ViewCompletedOrdersSellerSceneController controller = loader.getController();
+        controller.setSeller(seller);
+
+        Stage stage = (Stage) viewCompletedOrdersButton.getScene().getWindow();
         sceneObj = stage.getScene();
         currentSeller = seller;
         stage.setScene(new Scene(root));

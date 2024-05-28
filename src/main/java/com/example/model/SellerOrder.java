@@ -1,6 +1,8 @@
 package com.example.model;
 
 import java.io.Serializable;
+import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -10,6 +12,8 @@ public class SellerOrder implements Serializable {
     private String status;
     private ArrayList<Product> products;
     private int orderID;
+    private LocalDateTime deliveryDate;
+    private LocalDateTime orderPlacementDate;
 
     public SellerOrder(Buyer buyer, Seller seller, ArrayList<Product> products) {
         this.buyer = buyer;
@@ -17,6 +21,11 @@ public class SellerOrder implements Serializable {
         this.products = products;
         this.status = "Placed";
         this.orderID = generatSellerOrderID();
+        this.orderPlacementDate = LocalDateTime.now();
+    }
+
+    public void setDeliveryDate(LocalDateTime deliveryDate) {
+        this.deliveryDate = deliveryDate;
     }
 
     public int getSellerOrderID() {
@@ -65,12 +74,28 @@ public class SellerOrder implements Serializable {
         return newId;
     }
 
+    public LocalDateTime getDeliveryDate() {
+        return deliveryDate;
+    }
+
+    public LocalDateTime getOrderPlacementDate() {
+        return orderPlacementDate;
+    }
+
     public String toString() {
-        return "SellerOrder{" +
-                "seller=" + seller.getName() +
-                ", buyer=" + buyer.getName() +
-                ", status='" + status + '\'' +
-                ", products=" + products +
-                '}';
+        StringBuilder sb = new StringBuilder();
+        sb.append("Seller: ").append(seller.getName()).append("\n");
+        sb.append("Buyer: ").append(buyer.getName()).append("\n");
+        sb.append("Status: ").append(status).append("\n");
+        sb.append("Products: \n");
+        int total = 0;  
+        for (Product product : products) {
+            sb.append(" - ").append(product.getName()).append("\n");
+            total += product.getPrice();
+        }
+        
+        sb.append("Order ID: ").append(orderID).append("\n");
+        sb.append("Total: ").append(total).append("\n");
+        return sb.toString();
     }
 }

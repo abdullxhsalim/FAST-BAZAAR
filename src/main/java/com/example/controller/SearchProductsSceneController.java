@@ -82,7 +82,7 @@ public class SearchProductsSceneController {
     public void initialize() {
         searchBox.setOnAction(event -> {
             String searchText = searchBox.getText();
-            ArrayList<Product> results = buyer.getSearchedProducts(searchText);
+            ArrayList<Product> results = Buyer.getSearchedProducts(searchText);
             displaySearchResults(results);
         });
     

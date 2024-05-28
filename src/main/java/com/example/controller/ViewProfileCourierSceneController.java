@@ -2,6 +2,7 @@ package com.example.controller;
 
 import java.io.IOException;
 
+import com.example.exceptions.Exceptions;
 import com.example.model.Courier;
 import com.example.view.Main;
 
@@ -58,26 +59,45 @@ public class ViewProfileCourierSceneController {
 
     @FXML
     private void editCourierInfo() {
-        courier.setName(nameField.getText());
-        courier.setEmail(emailField.getText());
-        courier.setPhone(phoneField.getText());
-        courier.setAddress(addressField.getText());
-        courier.setCity(cityField.getText());
-        courier.setZip(Integer.parseInt(zipField.getText()));
-        courier.setCountry(countryField.getText());
-        for (Courier c : Main.couriers) {
-            if (c.equals(courier)) {
-                c.setName(courier.getName());
-                c.setEmail(courier.getEmail());
-                c.setPhone(courier.getPhone());
-                c.setAddress(courier.getAddress());
-                c.setCity(courier.getCity());
-                c.setZip(courier.getZip());
-                c.setCountry(courier.getCountry());
+        try {
+            Exceptions.emailValidator(emailField.getText());
+            Exceptions.nameValidator(nameField.getText());
+            Exceptions.phoneValidator(phoneField.getText());
+            Exceptions.zipValidator(zipField.getText());
+
+            courier.setName(nameField.getText());
+            courier.setEmail(emailField.getText());
+            courier.setPhone(phoneField.getText());
+            courier.setAddress(addressField.getText());
+            courier.setCity(cityField.getText());
+            courier.setZip(Integer.parseInt(zipField.getText()));
+            courier.setCountry(countryField.getText());
+            for (Courier c : Main.couriers) {
+                if (c.equals(courier)) {
+                    c.setName(courier.getName());
+                    c.setEmail(courier.getEmail());
+                    c.setPhone(courier.getPhone());
+                    c.setAddress(courier.getAddress());
+                    c.setCity(courier.getCity());
+                    c.setZip(courier.getZip());
+                    c.setCountry(courier.getCountry());
+                }
             }
+            Courier.updateBinaryFile(Main.couriers);
+            messageLabel.setText("Profile updated successfully!");
+        } catch (Exceptions.InvalidEmailException e) {
+            emailField.setStyle("-fx-text-fill: red;");
+            messageLabel.setText(e.toString());
+        } catch (Exceptions.InvalidNameException e) {
+            nameField.setStyle("-fx-text-fill: red;");
+            messageLabel.setText(e.toString());
+        } catch (Exceptions.InvalidPhoneException e) {
+            phoneField.setStyle("-fx-text-fill: red;");
+            messageLabel.setText(e.toString());
+        } catch (Exceptions.InvalidZipException e) {
+            zipField.setStyle("-fx-text-fill: red;");
+            messageLabel.setText(e.toString());
         }
-        Courier.updateBinaryFile(Main.couriers);
-        messageLabel.setText("Profile updated successfully!");
     }
 
     @FXML

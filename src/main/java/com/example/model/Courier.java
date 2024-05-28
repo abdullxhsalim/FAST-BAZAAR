@@ -1,5 +1,6 @@
 package com.example.model;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 import com.almasb.fxgl.core.collection.Array;
@@ -186,6 +187,16 @@ public class Courier extends User {
         }
     }
 
+    public ArrayList<SellerOrder> getCompletedOrders() {
+        ArrayList<SellerOrder> completedOrders = new ArrayList<>();
+        for (SellerOrder order : orders) {
+            if (order.getStatus().equals("Delivered")) {
+                completedOrders.add(order);
+            }
+        }
+        return completedOrders;
+    }
+
     public void viewAllOrders() {
         for (int i = 0; i < orders.size(); i++) {
             System.out.println(orders.get(i));
@@ -238,9 +249,20 @@ public class Courier extends User {
         for (SellerOrder sellerOrder : orders) {
             if (sellerOrder.equals(order)) {
                 sellerOrder.setStatus("Delivered");
+                sellerOrder.setDeliveryDate(LocalDateTime.now());
                 break;
             }
         }
+        for(Seller s : com.example.view.Main.sellers) {
+            for(SellerOrder sellerOrder : s.getOrders()) {
+                if(sellerOrder.equals(order)) {
+                    sellerOrder.setStatus("Delivered");
+                    sellerOrder.setDeliveryDate(LocalDateTime.now());
+                    break;
+                }
+            }
+        }
         updateBinaryFile(com.example.view.Main.couriers);
+        Seller.updateBinaryFile(com.example.view.Main.sellers);
     }
 }

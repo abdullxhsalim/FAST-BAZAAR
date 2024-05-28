@@ -3,7 +3,6 @@ package com.example.controller;
 import java.io.IOException;
 
 import com.example.model.Courier;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,7 +18,7 @@ public class LoggedInCourierSceneController {
     @FXML
     private Button updateOrdersButton;
     @FXML
-    private Button viewAllOrdersButton;
+    private Button viewCompletedOrdersButton;
     @FXML
     private Button profileButton;
     @FXML
@@ -54,7 +53,8 @@ public class LoggedInCourierSceneController {
     @FXML
     private void profile() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/view/ViewProfileCourierScene.fxml"));
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/com/example/view/ViewProfileCourierScene.fxml"));
             Parent root = loader.load();
 
             ViewProfileCourierSceneController controller = loader.getController();
@@ -72,9 +72,24 @@ public class LoggedInCourierSceneController {
     }
 
     @FXML
-    private void goBack() {
+    private void viewCompletedOrders() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/view/LoginScene.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/view/ViewCompletedOrdersCourierScene.fxml"));
+            Parent root = loader.load();
+
+            ViewCompletedOrdersCourierSceneController controller = loader.getController();
+            controller.setCourier(Courier);
+
+            Stage stage = (Stage) viewCompletedOrdersButton.getScene().getWindow();
+            stage.setScene(new Scene(root));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    private void goBack () {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/view/LoginCourierScene.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) goBackButton.getScene().getWindow();
             stage.setScene(new Scene(root));
@@ -84,7 +99,7 @@ public class LoggedInCourierSceneController {
     }
 
     @FXML
-    private void exit() {
+    private void exit () {
         Stage stage = (Stage) exitButton.getScene().getWindow();
         stage.close();
     }

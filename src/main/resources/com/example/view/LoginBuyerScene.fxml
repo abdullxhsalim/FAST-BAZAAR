@@ -9,7 +9,7 @@
       <TextField fx:id="emailField" promptText="Email" />
       <PasswordField fx:id="passwordField" promptText="Password" />
       <Button fx:id="loginButton" mnemonicParsing="false" prefWidth="200.0" style="-fx-font-size: 16px; -fx-background-color: #4CAF50; -fx-text-fill: white;" text="Login" onAction="#login" />
-      <Button fx:id="goBackButton" mnemonicParsing="false" prefWidth="200.0" style="-fx-font-size: 16px; -fx-background-color: #2196F3; -fx-text-fill: white;" text="Go Back" onAction="#goBack" />
+      <Button fx:id="goBackButton" mnemonicParsing="false" prefWidth="200.0" style="-fx-font-size: 16px; -fx-background-color: #ff0000; -fx-text-fill: white;" text="Go Back" onAction="#goBack" />
       <Label fx:id="messageLabel" />
    </children>
 </VBox>
