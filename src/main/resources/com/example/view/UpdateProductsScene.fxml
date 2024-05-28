@@ -41,9 +41,9 @@
     </GridPane>
     <ImageView fx:id="productImageView" fitHeight="100" fitWidth="100" preserveRatio="true" />
     <HBox spacing="10">
-        <Button fx:id="goBackButton" onAction="#goBack" style="-fx-background-color: #3F51B5; -fx-text-fill: white;" text="Go Back" />
+        <Button fx:id="goBackButton" onAction="#goBack" style="-fx-background-color: #fc0000; -fx-text-fill: white;" text="Go Back" />
         <Region HBox.hgrow="ALWAYS" />
         <Button fx:id="updateProductButton" onAction="#updateProduct" style="-fx-background-color: #4CAF50; -fx-text-fill: white;" text="Update Product" />
-        <Button fx:id="removeProductButton" onAction="#removeProduct" style="-fx-background-color: #f44336; -fx-text-fill: white;" text="Remove Product" />
+        <Button fx:id="removeProductButton" onAction="#removeProduct" style="-fx-background-color: #ffde00; -fx-text-fill: white;" text="Remove Product" />
     </HBox>
 </VBox>

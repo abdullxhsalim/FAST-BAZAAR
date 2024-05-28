@@ -15,7 +15,7 @@
               
       <Button fx:id="courierButton" mnemonicParsing="false" prefWidth="200.0" style="-fx-font-size: 16px; -fx-background-color: #FF9800; -fx-text-fill: white;" text="Courier" />
               
-      <Button fx:id="adminButton" mnemonicParsing="false" prefWidth="200.0" style="-fx-font-size: 16px; -fx-background-color: #9C27B0; -fx-text-fill: white;" text="Admin" />
+      <!-- <Button fx:id="adminButton" mnemonicParsing="false" prefWidth="200.0" style="-fx-font-size: 16px; -fx-background-color: #9C27B0; -fx-text-fill: white;" text="Admin" /> -->
    </children>
    
 </VBox>

@@ -32,6 +32,6 @@
             <Label text="Country:" style="-fx-font-weight: bold;" GridPane.columnIndex="0" GridPane.rowIndex="6" />
             <Label fx:id="countryLabel" style="-fx-font-size: 16px;" GridPane.columnIndex="1" GridPane.rowIndex="6" />
         </GridPane>
-        <Button fx:id="goBackButton" maxWidth="300.0" mnemonicParsing="false" style="-fx-font-size: 16px; -fx-background-color: #4CAF50; -fx-text-fill: white;" text="Go back" />
+        <Button fx:id="goBackButton" maxWidth="300.0" mnemonicParsing="false" style="-fx-font-size: 16px; -fx-background-color: #fc0000; -fx-text-fill: white;" text="Go back" />
     </children>
 </VBox>

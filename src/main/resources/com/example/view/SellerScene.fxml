@@ -9,7 +9,7 @@
         <Label fx:id="instructionLabel" style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Seller Page" />
         <Button fx:id="registerButton" mnemonicParsing="false" prefWidth="200.0" style="-fx-font-size: 16px; -fx-background-color: #4CAF50; -fx-text-fill: white;" text="Register" />
         <Button fx:id="loginButton" mnemonicParsing="false" prefWidth="200.0" style="-fx-font-size: 16px; -fx-background-color: #2196F3; -fx-text-fill: white;" text="Login" />
-        <Button fx:id="backButton" mnemonicParsing="false" prefWidth="200.0" style="-fx-font-size: 16px; -fx-background-color: #FF9800; -fx-text-fill: white;" text="Go back" />
-        <Button fx:id="exitButton" mnemonicParsing="false" prefWidth="200.0" style="-fx-font-size: 16px; -fx-background-color: #9C27B0; -fx-text-fill: white;" text="Exit the program" />
+        <Button fx:id="backButton" mnemonicParsing="false" prefWidth="200.0" style="-fx-font-size: 16px; -fx-background-color: #fc0000; -fx-text-fill: white;" text="Go back" />
+        <Button fx:id="exitButton" mnemonicParsing="false" prefWidth="200.0" style="-fx-font-size: 16px; -fx-background-color: #000000; -fx-text-fill: white;" text="Exit the program" />
     </children>
 </VBox>

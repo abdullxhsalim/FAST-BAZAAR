@@ -136,18 +136,18 @@ public class BuyerOrder implements Serializable {
 
     @Override
     public String toString() {
-        return "BuyerOrder {\n" +
-                "  buyer: " + buyer.getName() + ",\n" +
-                "  sellers: " + sellers + ",\n" +
-                "  courier: " + courier.getName() + ",\n" +
-                "  status: " + status + ",\n" +
-                "  id: " + orderID + ",\n" +
-                "  orderPlacementTime: " + orderPlacementTime + ",\n" +
-                "  totalCost: " + totalCost + ",\n" +
-                "  address: " + address + ",\n" +
-                "  city: " + city + ",\n" +
-                "  zip: " + zip + ",\n" +
-                "  country: " + country + "\n" +
-                "}";
+        return "Order \n" +
+                "\tBuyer: " + buyer.getName() + ",\n" +
+                "\tSellers: " + sellers + ",\n" +
+                "\tCourier: " + courier.getName() + ",\n" +
+                "\tStatus: " + status + ",\n" +
+                "\tID: " + orderID + ",\n" +
+                "\tOrder Placement Time: " + orderPlacementTime + ",\n" +
+                "\tTotal Cost: " + totalCost + ",\n" +
+                "\tAddress: " + address + ",\n" +
+                "\tCity: " + city + ",\n" +
+                "\tZIP: " + zip + ",\n" +
+                "\tCountry: " + country + "\n" +
+                "\n";
     }
 }

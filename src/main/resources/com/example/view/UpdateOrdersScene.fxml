@@ -12,6 +12,6 @@
     </padding>
     <ListView fx:id="orderListView" />
     <HBox alignment="BOTTOM_LEFT" spacing="10">
-        <Button fx:id="goBackButton" onAction="#goBack" text="Go back to Courier Menu" />
+        <Button fx:id="goBackButton" mnemonicParsing="false" onAction="#goBack" prefWidth="200.0" style="-fx-font-size: 16px; -fx-background-color: #ff0000; -fx-text-fill: white;" text="Go Back" />
     </HBox>
 </VBox>

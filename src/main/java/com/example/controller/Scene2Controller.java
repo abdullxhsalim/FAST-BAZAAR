@@ -22,15 +22,15 @@ public class Scene2Controller {
     private Button sellerButton;
     @FXML
     private Button courierButton;
-    @FXML
-    private Button adminButton;
+    // @FXML
+    // private Button adminButton;
 
     public void initialize() {
         instructionLabel.setText("Who is using the program?");
         buyerButton.setOnAction(e -> loadScene("/com/example/view/BuyerScene.fxml"));
         sellerButton.setOnAction(e -> loadScene("/com/example/view/SellerScene.fxml"));
         courierButton.setOnAction(e -> loadScene("/com/example/view/CourierScene.fxml"));
-        adminButton.setOnAction(e -> loadScene("/com/example/view/AdminScene.fxml"));
+        // adminButton.setOnAction(e -> loadScene("/com/example/view/AdminScene.fxml"));
     }
 
     private void loadScene(String fxmlFile) {

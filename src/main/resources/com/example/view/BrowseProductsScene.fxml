@@ -21,6 +21,6 @@
     <VBox fx:id="productsContainer" spacing="10">
     </VBox>
     <HBox alignment="BOTTOM_LEFT" style="-fx-padding: 10 0 0 0;" VBox.vgrow="ALWAYS">
-        <Button fx:id="goBackButton" style="-fx-background-color: #3F51B5; -fx-text-fill: white;" text="Go Back" />
+        <Button fx:id="goBackButton" style="-fx-background-color: #fc0000; -fx-text-fill: white;" text="Go Back" />
     </HBox>
 </VBox>

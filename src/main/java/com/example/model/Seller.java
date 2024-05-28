@@ -301,17 +301,17 @@ public class Seller extends User {
 
     @Override
     public String toString() {
-        return "Seller{" +
-                "name='" + getName() + '\'' +
-                ", email='" + getEmail() + '\'' +
-                ", password='" + getPassword() + '\'' +
-                ", phone='" + getPhone() + '\'' +
-                ", address='" + getAddress() + '\'' +
-                ", city='" + getCity() + '\'' +
-                ", zip=" + getZip() +
-                ", country='" + getCountry() + '\'' +
-                ", productList=" + productList +
-                ", sellerOrders=" + sellerOrders +
-                '}';
+        return "\nSeller\n" +
+                "\tName: " + getName() + ",\n" +
+                "\tEmail: " + getEmail() + ",\n" +
+                "\tPassword: " + getPassword() + ",\n" +
+                "\tPhone: " + getPhone() + ",\n" +
+                "\tAddress: " + getAddress() + ",\n" +
+                "\tCity: " + getCity() + ",\n" +
+                "\tZIP: " + getZip() + ",\n" +
+                "\tCountry: " + getCountry() + ",\n" +
+                "\tProduct List: " + productList + ",\n" +
+                "\tSeller Orders: " + sellerOrders + "\n" +
+                "\n";
     }
 }
